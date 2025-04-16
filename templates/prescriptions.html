@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}MediAssist - Prescriptions{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2 mb-0"><i class="fas fa-file-medical me-2"></i>My Prescriptions</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-prescription-modal">
+        <i class="fas fa-plus me-1"></i> Add Prescription
+    </button>
+</div>
+
+<div id="alert-container"></div>
+
+<div id="prescriptions-list">
+    <!-- Prescriptions will be loaded here via JavaScript -->
+</div>
+
+<!-- Add/Edit Prescription Modal -->
+<div class="modal fade" id="add-prescription-modal" tabindex="-1" aria-labelledby="prescription-modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="prescription-modal-title">Add New Prescription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="prescription-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="prescription-title" class="form-label">Prescription Title</label>
+                        <input type="text" class="form-control" id="prescription-title" name="title" required>
+                        <div class="invalid-feedback">Prescription title is required</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="prescription-doctor" class="form-label">Prescribed By</label>
+                        <input type="text" class="form-control" id="prescription-doctor" name="doctor" placeholder="e.g., Dr. Smith">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="prescription-date" class="form-label">Date Prescribed</label>
+                        <input type="date" class="form-control" id="prescription-date" name="date" required>
+                        <div class="invalid-feedback">Date is required</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="prescription-image" class="form-label">Upload Prescription Image</label>
+                        <input class="form-control" type="file" id="prescription-image" name="image" accept="image/*">
+                        <div class="form-text">Upload a clear photo of your prescription</div>
+                    </div>
+                    
+                    <div class="mb-3" id="image-preview-container" style="display: none;">
+                        <label class="form-label">Preview</label>
+                        <div class="text-center">
+                            <img id="image-preview" class="img-fluid thumbnail" alt="Prescription Preview">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="prescription-notes" class="form-label">Notes</label>
+                        <textarea class="form-control" id="prescription-notes" name="notes" rows="3" placeholder="Additional information about this prescription"></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save Prescription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Prescription Modal -->
+<div class="modal fade" id="view-prescription-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="view-prescription-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><i class="far fa-calendar-alt me-2"></i>Date: <span id="view-prescription-date"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><i class="fas fa-user-md me-2"></i>Doctor: <span id="view-prescription-doctor"></span></p>
+                    </div>
+                </div>
+                
+                <div id="view-prescription-image" class="text-center mb-3">
+                    <!-- Prescription image will be displayed here -->
+                </div>
+                
+                <div class="mb-3">
+                    <h6>Notes:</h6>
+                    <p id="view-prescription-notes" class="text-muted"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/prescriptions.js') }}"></script>
+{% endblock %}

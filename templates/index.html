@@ -1,0 +1,323 @@
+{% extends 'base.html' %}
+
+{% block title %}MediAssist - Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-center app-header animate-fade-in">
+        <h1 class="app-title">Welcome to MediAssist</h1>
+        <p class="app-subtitle">Your personal medication and medical appointment management app</p>
+    </div>
+</div>
+
+{% if current_user.is_authenticated %}
+<!-- Dashboard for logged in users -->
+<div class="row mt-4 animate-fade-in">
+    <!-- Medications Summary -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-pills me-2"></i>My Medications</h5>
+                    <a href="{{ url_for('medications') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if medications %}
+                    <ul class="list-group list-group-flush">
+                        {% for medication in medications[:3] %}
+                        <li class="list-group-item px-0">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1">{{ medication.name }}</h6>
+                                    <p class="mb-1">{{ medication.dosage }}</p>
+                                    <div class="text-muted small">
+                                        <i class="fas fa-clock me-1"></i>
+                                        {% set times = medication.time|tojson_parse %}
+                                        {% for time in times %}
+                                            <span class="badge bg-info me-1">{{ time }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <span class="badge bg-secondary align-self-center">{{ medication.frequency }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('medications') }}" class="btn btn-primary">
+                            <i class="fas fa-pills me-1"></i> Manage Medications
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <div class="mb-3">
+                            <i class="fas fa-pills fa-3x text-muted"></i>
+                        </div>
+                        <h5>No medications added yet</h5>
+                        <p class="text-muted">Keep track of your medications by adding them</p>
+                        <a href="{{ url_for('medications') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i> Add Medication
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Appointments -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Upcoming Appointments</h5>
+                    <a href="{{ url_for('appointments') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if upcoming_appointments %}
+                    <ul class="list-group list-group-flush">
+                        {% for appointment in upcoming_appointments %}
+                        <li class="list-group-item px-0">
+                            <h6 class="mb-1">{{ appointment.title }}</h6>
+                            <p class="mb-1">
+                                <i class="far fa-calendar me-1"></i> 
+                                {{ appointment.date.strftime('%b %d, %Y') }} at 
+                                {{ appointment.time.strftime('%I:%M %p') }}
+                            </p>
+                            {% if appointment.location %}
+                            <p class="mb-0 text-muted small">
+                                <i class="fas fa-map-marker-alt me-1"></i> {{ appointment.location }}
+                            </p>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('appointments') }}" class="btn btn-primary">
+                            <i class="fas fa-calendar-alt me-1"></i> Manage Appointments
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <div class="mb-3">
+                            <i class="fas fa-calendar-alt fa-3x text-muted"></i>
+                        </div>
+                        <h5>No upcoming appointments</h5>
+                        <p class="text-muted">Schedule your medical appointments to get reminders</p>
+                        <a href="{{ url_for('appointments') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i> Schedule Appointment
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-bell me-2"></i>Notifications</h5>
+            </div>
+            <div class="card-body">
+                {% if notifications %}
+                    <ul class="list-group list-group-flush">
+                        {% for notification in notifications[:5] %}
+                        <li class="list-group-item px-0 notification-item {% if not notification.is_read %}unread{% endif %}">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="mb-1"><strong>{{ notification.message }}</strong></p>
+                                    <p class="mb-0 text-muted small">
+                                        <i class="fas fa-clock me-1"></i>
+                                        {{ notification.scheduled_time.strftime('%I:%M %p') }}
+                                    </p>
+                                </div>
+                                {% if not notification.is_read %}
+                                <button class="btn btn-sm btn-link text-primary" 
+                                        onclick="markNotificationAsRead('{{ notification.id }}')">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% if notifications|length > 5 %}
+                        <div class="text-center mt-3">
+                            <button class="btn btn-outline-primary btn-sm" 
+                                    data-bs-toggle="dropdown" 
+                                    aria-expanded="false" 
+                                    id="notification-dropdown-toggle">
+                                View All Notifications
+                            </button>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center py-4">
+                        <div class="mb-3">
+                            <i class="fas fa-bell fa-3x text-muted"></i>
+                        </div>
+                        <h5>No new notifications</h5>
+                        <p class="text-muted">You'll receive reminders here for medications and appointments</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <a href="{{ url_for('medications') }}" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-pills fa-2x mb-2"></i>
+                            <div>Add Medication</div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('appointments') }}" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-calendar-plus fa-2x mb-2"></i>
+                            <div>Schedule Appointment</div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('prescriptions') }}" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-file-medical fa-2x mb-2"></i>
+                            <div>Add Prescription</div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('contacts') }}" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-address-book fa-2x mb-2"></i>
+                            <div>Emergency Contacts</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<!-- Landing page for not logged in users -->
+<div class="row mt-5 animate-fade-in">
+    <div class="col-md-6 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                        <path d="m8 2 1.88 1.88"></path>
+                        <path d="M14.12 3.88 16 2"></path>
+                        <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"></path>
+                        <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"></path>
+                        <path d="M12 20v-9"></path>
+                        <path d="M8.5 14h7"></path>
+                    </svg>
+                </div>
+                <h2 class="mb-3">Track Your Medications</h2>
+                <p class="text-muted mb-4">Manage all your medications in one place and get timely reminders.</p>
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                        <line x1="16" x2="16" y1="2" y2="6"></line>
+                        <line x1="8" x2="8" y1="2" y2="6"></line>
+                        <line x1="3" x2="21" y1="10" y2="10"></line>
+                        <path d="M8 14h.01"></path>
+                        <path d="M12 14h.01"></path>
+                        <path d="M16 14h.01"></path>
+                        <path d="M8 18h.01"></path>
+                        <path d="M12 18h.01"></path>
+                        <path d="M16 18h.01"></path>
+                    </svg>
+                </div>
+                <h2 class="mb-3">Manage Appointments</h2>
+                <p class="text-muted mb-4">Schedule your medical appointments and never miss an important visit.</p>
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4 animate-fade-in">
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-4">
+                <div class="feature-icon mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                        <path d="M4 10c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2"></path>
+                        <path d="M10 16c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2"></path>
+                        <path d="M16 22c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2"></path>
+                    </svg>
+                </div>
+                <h4>Store Prescriptions</h4>
+                <p class="text-muted">Digitally store and access all your medical prescriptions in one secure place.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-4">
+                <div class="feature-icon mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                        <path d="M5 7H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"></path>
+                        <line x1="2" x2="22" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+                <h4>Medication Reminders</h4>
+                <p class="text-muted">Get notifications when it's time to take your medications, ensuring you never miss a dose.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-4">
+                <div class="feature-icon mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                    </svg>
+                </div>
+                <h4>Emergency Contacts</h4>
+                <p class="text-muted">Keep your emergency contacts handy for quick access during medical emergencies.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 mb-5 animate-fade-in">
+    <div class="col-md-8 offset-md-2 text-center">
+        <h2 class="mb-4">Ready to Take Control of Your Health?</h2>
+        <p class="lead mb-4">MediAssist helps you manage your medications, appointments, and prescriptions all in one place.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg px-4 me-md-2">Sign Up Now</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg px-4">Sign In</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Custom function to parse JSON string from Jinja
+function tojson_parse(json_str) {
+    try {
+        return JSON.parse(json_str);
+    } catch (e) {
+        return [];
+    }
+}
+</script>
+{% endblock %}

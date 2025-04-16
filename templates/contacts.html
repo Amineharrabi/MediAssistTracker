@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}MediAssist - Emergency Contacts{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2 mb-0"><i class="fas fa-address-book me-2"></i>Emergency Contacts</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-contact-modal">
+        <i class="fas fa-plus me-1"></i> Add Contact
+    </button>
+</div>
+
+<div id="alert-container"></div>
+
+<div class="card mb-4">
+    <div class="card-body bg-light">
+        <div class="row align-items-center">
+            <div class="col-md-1 text-center">
+                <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
+            </div>
+            <div class="col-md-11">
+                <h5 class="mb-1">In case of emergency</h5>
+                <p class="mb-0">Add important contacts here for quick access during medical emergencies. In a medical emergency, call your local emergency number (e.g., 911 in the US) immediately.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contacts-list">
+    <!-- Contacts will be loaded here via JavaScript -->
+</div>
+
+<!-- Add/Edit Contact Modal -->
+<div class="modal fade" id="add-contact-modal" tabindex="-1" aria-labelledby="contact-modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contact-modal-title">Add Emergency Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="contact-form">
+                    <div class="mb-3">
+                        <label for="contact-name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="contact-name" required>
+                        <div class="invalid-feedback">Contact name is required</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contact-relationship" class="form-label">Relationship</label>
+                        <input type="text" class="form-control" id="contact-relationship" placeholder="e.g., Spouse, Doctor, Family Member">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contact-phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="contact-phone" required>
+                        <div class="invalid-feedback">Valid phone number is required</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contact-email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="contact-email">
+                        <div class="invalid-feedback">Please enter a valid email</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="contact-notes" class="form-label">Notes</label>
+                        <textarea class="form-control" id="contact-notes" rows="3" placeholder="Additional information"></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Save Contact</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/contacts.js') }}"></script>
+{% endblock %}
