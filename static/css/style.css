@@ -36,24 +36,33 @@ body {
   line-height: 1.6;
   transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Light Theme (default) */
 body.light-theme {
   background-color: var(--light-bg);
+  background-image: 
+    radial-gradient(rgba(78, 148, 251, 0.06) 2px, transparent 2px),
+    radial-gradient(rgba(78, 148, 251, 0.04) 2px, transparent 2px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
   color: var(--light-text);
 }
 
 .light-theme .card,
 .light-theme .modal-content {
-  background-color: var(--light-card-bg);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-color: var(--light-border);
-  box-shadow: 0 4px 6px var(--light-shadow);
+  box-shadow: 0 4px 15px var(--light-shadow);
 }
 
 .light-theme .navbar,
 .light-theme .footer {
-  background-color: var(--light-card-bg);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
   border-color: var(--light-border);
 }
 
@@ -85,19 +94,26 @@ body.light-theme {
 /* Dark Theme */
 body.dark-theme {
   background-color: var(--dark-bg);
+  background-image: 
+    radial-gradient(rgba(49, 130, 206, 0.15) 2px, transparent 2px),
+    radial-gradient(rgba(49, 130, 206, 0.1) 2px, transparent 2px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
   color: var(--dark-text);
 }
 
 .dark-theme .card,
 .dark-theme .modal-content {
-  background-color: var(--dark-card-bg);
+  background-color: rgba(45, 55, 72, 0.95);
+  backdrop-filter: blur(10px);
   border-color: var(--dark-border);
-  box-shadow: 0 4px 6px var(--dark-shadow);
+  box-shadow: 0 4px 15px var(--dark-shadow);
 }
 
 .dark-theme .navbar,
 .dark-theme .footer {
-  background-color: var(--dark-card-bg);
+  background-color: rgba(45, 55, 72, 0.9);
+  backdrop-filter: blur(10px);
   border-color: var(--dark-border);
 }
 
