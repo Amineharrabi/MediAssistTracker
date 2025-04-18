@@ -1,12 +1,10 @@
 <?php
+require_once __DIR__ . '/phpdotenv/src/Dotenv.php';
+require_once __DIR__ . '/phpdotenv/src/Loader/Loader.php';
+require_once __DIR__ . '/phpdotenv/src/Parser/Parser.php';
+require_once __DIR__ . '/phpdotenv/src/Validator.php';
 
+use Dotenv\Dotenv;
 
-$envPath = __DIR__ . '/.env';
-if (file_exists($envPath)) {
-    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-        list($name, $value) = explode('=', $line, 2);
-        putenv(trim($name) . '=' . trim($value));
-    }
-}
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
