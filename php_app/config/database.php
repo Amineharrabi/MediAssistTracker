@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../load_env.php';
+require_once __DIR__ . '/load_env.php';
 
 $db_host = $_ENV['DB_HOST'];
 $db_port = $_ENV['DB_PORT'];

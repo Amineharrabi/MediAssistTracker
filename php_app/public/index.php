@@ -4,7 +4,7 @@
  * MediAssist - Main Entry Point
  */
 
-// Load configuration
+echo "Index.php is working!";
 require_once dirname(__DIR__) . '/config/config.php';
 echo getenv('DB_HOST');
 // Load model classes
