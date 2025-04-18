@@ -1,19 +1,26 @@
 <?php
-/**
- * Database Configuration
- */
+require_once __DIR__ . '/phpdotenv/src/Dotenv.php';
+require_once __DIR__ . '/phpdotenv/src/Loader.php';
+require_once __DIR__ . '/phpdotenv/src/Parser.php';
+require_once __DIR__ . '/phpdotenv/src/Validator.php';
+require_once __DIR__ . '/phpdotenv/src/Exception/ExceptionInterface.php';
+require_once __DIR__ . '/phpdotenv/src/Exception/InvalidPathException.php';
 
-// Get environment variables or set defaults
-$db_host = getenv('PGHOST') ?: 'localhost';
-$db_port = getenv('PGPORT') ?: '5432';
-$db_name = getenv('PGDATABASE') ?: 'mediassist';
-$db_user = getenv('PGUSER') ?: 'postgres';
-$db_pass = getenv('PGPASSWORD') ?: '';
+use Dotenv\Dotenv;
 
-// Build DSN (Data Source Name)
+// Load environment variables
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load(); // <-- Call load() explicitly
+
+// Access variables
+$db_host = $_ENV['DB_HOST'];
+$db_port = $_ENV['DB_PORT'];
+$db_name = $_ENV['DB_NAME'];
+$db_user = $_ENV['DB_USER'];
+$db_pass = $_ENV['DB_PASS'];
+
 $dsn = "pgsql:host=$db_host;port=$db_port;dbname=$db_name;";
 
-// PDO options
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -21,14 +28,12 @@ $options = [
 ];
 
 try {
-    // Create a new PDO instance
     $pdo = new PDO($dsn, $db_user, $db_pass, $options);
-    
-    // Set connection encoding
+
+    // Optional: set encoding
     $pdo->exec("SET NAMES 'utf8'");
-    
+
     return $pdo;
 } catch (PDOException $e) {
-    // Handle connection error
     die('Database Connection Error: ' . $e->getMessage());
 }

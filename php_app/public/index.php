@@ -46,7 +46,7 @@ switch ($route) {
             redirect('/');
         }
         
-        $page_title = 'Register - MediAssist';
+        $page_title = 'Register to MediAssist';
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = sanitize($_POST['username'] ?? '');

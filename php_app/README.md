@@ -79,3 +79,4 @@ The application is fully responsive and works on:
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
+
