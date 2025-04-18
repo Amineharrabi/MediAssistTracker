@@ -1,18 +1,6 @@
 <?php
-require_once __DIR__ . '/phpdotenv/src/Dotenv.php';
-require_once __DIR__ . '/phpdotenv/src/Loader.php';
-require_once __DIR__ . '/phpdotenv/src/Parser.php';
-require_once __DIR__ . '/phpdotenv/src/Validator.php';
-require_once __DIR__ . '/phpdotenv/src/Exception/ExceptionInterface.php';
-require_once __DIR__ . '/phpdotenv/src/Exception/InvalidPathException.php';
+require_once __DIR__ . '/../load_env.php';
 
-use Dotenv\Dotenv;
-
-// Load environment variables
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load(); // <-- Call load() explicitly
-
-// Access variables
 $db_host = $_ENV['DB_HOST'];
 $db_port = $_ENV['DB_PORT'];
 $db_name = $_ENV['DB_NAME'];
