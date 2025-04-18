@@ -1,0 +1,13 @@
+{
+    "name": "amineh/medassist-backend",
+    "description": "PHP API for MedAssistTracker using Supabase",
+    "require": {
+      "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+      "psr-4": {
+        "App\\": "src/"
+      }
+    }
+  }
+  
