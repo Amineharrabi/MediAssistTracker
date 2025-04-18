@@ -1,24 +1,27 @@
 <?php
 require_once dirname(__DIR__) . '/config/config.php';
 echo getenv('DB_HOST');
-echo "Index.php is working!";
 require_once INCLUDES_PATH . '/models/User.php';
 require_once INCLUDES_PATH . '/models/Medication.php';
 require_once INCLUDES_PATH . '/models/Appointment.php';
 require_once INCLUDES_PATH . '/models/Prescription.php';
 require_once INCLUDES_PATH . '/models/EmergencyContact.php';
 require_once INCLUDES_PATH . '/models/Notification.php';
+require_once INCLUDES_PATH . '/models/Notification.php';
+require_once __DIR__ . '/../config/load_env.php';
+
 
 // Initialize models
-$userModel = new User($db);
-$medicationModel = new Medication($db);
-$appointmentModel = new Appointment($db);
-$prescriptionModel = new Prescription($db);
-$contactModel = new EmergencyContact($db);
-$notificationModel = new Notification($db);
+$userModel = new User($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
+$medicationModel = new Medication($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
+$appointmentModel = new Appointment($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
+$prescriptionModel = new Prescription($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
+$contactModel = new EmergencyContact($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
+$notificationModel = new Notification($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 
 // Handle page routing
 $route = $_GET['route'] ?? 'home';
+
 
 // Check for theme toggle
 if (isset($_POST['toggle_theme']) && is_logged_in()) {
@@ -120,7 +123,8 @@ switch ($route) {
         render('layouts/auth.php', [
             'page_title' => $page_title,
             'page_content' => 'partials/login_form.php',
-            'flash_messages' => $flash_messages
+            'flash_messages' => $flash_messages,
+            'route' => $route
         ]);
         break;
 
@@ -144,7 +148,8 @@ switch ($route) {
             'page_title' => $page_title,
             'page_content' => 'partials/medications.php',
             'flash_messages' => $flash_messages,
-            'medications' => $medications ?: []
+            'medications' => $medications ?: [],
+            'route' => $route
         ]);
         break;
 
@@ -159,7 +164,8 @@ switch ($route) {
             'page_title' => $page_title,
             'page_content' => 'partials/appointments.php',
             'flash_messages' => $flash_messages,
-            'appointments' => $appointments ?: []
+            'appointments' => $appointments ?: [],
+            'route' => $route
         ]);
         break;
 
@@ -174,7 +180,8 @@ switch ($route) {
             'page_title' => $page_title,
             'page_content' => 'partials/prescriptions.php',
             'flash_messages' => $flash_messages,
-            'prescriptions' => $prescriptions ?: []
+            'prescriptions' => $prescriptions ?: [],
+            'route' => $route
         ]);
         break;
 
@@ -189,7 +196,8 @@ switch ($route) {
             'page_title' => $page_title,
             'page_content' => 'partials/contacts.php',
             'flash_messages' => $flash_messages,
-            'contacts' => $contacts ?: []
+            'contacts' => $contacts ?: [],
+            'route' => $route
         ]);
         break;
 
@@ -216,7 +224,8 @@ switch ($route) {
             'flash_messages' => $flash_messages,
             'upcoming_appointments' => $upcoming_appointments ?: [],
             'medications' => $medications ?: [],
-            'contacts' => $contacts ?: []
+            'contacts' => $contacts ?: [],
+            'route' => $route
         ]);
         break;
 }

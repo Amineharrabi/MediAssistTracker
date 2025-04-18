@@ -1,178 +1,109 @@
 <?php
+
 /**
- * Prescription Model
+ * Prescription Model (Supabase Version)
  */
 
-class Prescription {
-    private $db;
-    
-    /**
-     * Constructor
-     *
-     * @param PDO $db Database connection
-     */
-    public function __construct($db) {
-        $this->db = $db;
+class Prescription
+{
+    private $supabaseUrl;
+    private $supabaseKey;
+    private $table = 'prescription';
+
+    public function __construct($supabaseUrl, $supabaseKey)
+    {
+        $this->supabaseUrl = $supabaseUrl;
+        $this->supabaseKey = $supabaseKey;
     }
-    
-    /**
-     * Get all prescriptions for a user
-     *
-     * @param int $user_id User ID
-     * @return array|bool Array of prescriptions if successful, false otherwise
-     */
-    public function getAll($user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                SELECT * FROM prescription
-                WHERE user_id = :user_id
-                ORDER BY date DESC
-            ");
-            
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->execute();
-            
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            add_flash_message('Error fetching prescriptions: ' . $e->getMessage(), 'danger');
+
+    private function makeRequest($method, $endpoint, $data = null, $queryParams = '')
+    {
+        $url = "$this->supabaseUrl/rest/v1/$endpoint$queryParams";
+
+        $headers = [
+            "apikey: $this->supabaseKey",
+            "Authorization: Bearer $this->supabaseKey",
+            "Content-Type: application/json",
+            "Prefer: return=representation"
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        if ($method === 'POST') {
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        } elseif ($method === 'PATCH') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        } elseif ($method === 'DELETE') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        }
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            add_flash_message("cURL Error: $error", 'danger');
             return false;
         }
+
+        return json_decode($response, true);
     }
-    
-    /**
-     * Get a prescription by ID
-     *
-     * @param int $id Prescription ID
-     * @param int $user_id User ID (for security)
-     * @return array|bool Prescription data if found, false otherwise
-     */
-    public function getById($id, $user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                SELECT * FROM prescription
-                WHERE id = :id AND user_id = :user_id
-            ");
-            
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->execute();
-            
-            return $stmt->fetch();
-        } catch (PDOException $e) {
-            add_flash_message('Error fetching prescription: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+
+    public function getAll($user_id)
+    {
+        $query = "?user_id=eq." . urlencode($user_id) . "&order=date.desc";
+        return $this->makeRequest('GET', $this->table, null, $query);
     }
-    
-    /**
-     * Create a new prescription
-     *
-     * @param string $title Prescription title
-     * @param string $doctor Doctor name
-     * @param string $date Date in YYYY-MM-DD format
-     * @param string $image_data Base64 encoded image data
-     * @param string $notes Additional notes
-     * @param int $user_id User ID
-     * @return int|bool Prescription ID if successful, false otherwise
-     */
-    public function create($title, $doctor, $date, $image_data, $notes, $user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                INSERT INTO prescription (title, doctor, date, image_data, notes, user_id)
-                VALUES (:title, :doctor, :date, :image_data, :notes, :user_id)
-                RETURNING id
-            ");
-            
-            $stmt->bindParam(':title', $title);
-            $stmt->bindParam(':doctor', $doctor);
-            $stmt->bindParam(':date', $date);
-            $stmt->bindParam(':image_data', $image_data);
-            $stmt->bindParam(':notes', $notes);
-            $stmt->bindParam(':user_id', $user_id);
-            
-            $stmt->execute();
-            
-            return $stmt->fetchColumn();
-        } catch (PDOException $e) {
-            add_flash_message('Error creating prescription: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+
+    public function getById($id, $user_id)
+    {
+        $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
+        $result = $this->makeRequest('GET', $this->table, null, $query);
+        return $result[0] ?? false;
     }
-    
-    /**
-     * Update a prescription
-     *
-     * @param int $id Prescription ID
-     * @param string $title Prescription title
-     * @param string $doctor Doctor name
-     * @param string $date Date in YYYY-MM-DD format
-     * @param string $image_data Base64 encoded image data (null to keep existing)
-     * @param string $notes Additional notes
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
-    public function update($id, $title, $doctor, $date, $image_data, $notes, $user_id) {
-        try {
-            // If image_data is null, don't update it
-            if ($image_data === null) {
-                $stmt = $this->db->prepare("
-                    UPDATE prescription
-                    SET title = :title, doctor = :doctor,
-                        date = :date, notes = :notes, updated_at = NOW()
-                    WHERE id = :id AND user_id = :user_id
-                ");
-                
-                $stmt->bindParam(':id', $id);
-                $stmt->bindParam(':title', $title);
-                $stmt->bindParam(':doctor', $doctor);
-                $stmt->bindParam(':date', $date);
-                $stmt->bindParam(':notes', $notes);
-                $stmt->bindParam(':user_id', $user_id);
-            } else {
-                $stmt = $this->db->prepare("
-                    UPDATE prescription
-                    SET title = :title, doctor = :doctor,
-                        date = :date, image_data = :image_data, notes = :notes, updated_at = NOW()
-                    WHERE id = :id AND user_id = :user_id
-                ");
-                
-                $stmt->bindParam(':id', $id);
-                $stmt->bindParam(':title', $title);
-                $stmt->bindParam(':doctor', $doctor);
-                $stmt->bindParam(':date', $date);
-                $stmt->bindParam(':image_data', $image_data);
-                $stmt->bindParam(':notes', $notes);
-                $stmt->bindParam(':user_id', $user_id);
-            }
-            
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            add_flash_message('Error updating prescription: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+
+    public function create($title, $doctor, $date, $image_data, $notes, $user_id)
+    {
+        $data = [
+            'title' => $title,
+            'doctor' => $doctor,
+            'date' => $date,
+            'image_data' => $image_data,
+            'notes' => $notes,
+            'user_id' => $user_id
+        ];
+
+        $result = $this->makeRequest('POST', $this->table, $data);
+        return $result[0]['id'] ?? false;
     }
-    
-    /**
-     * Delete a prescription
-     *
-     * @param int $id Prescription ID
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
-    public function delete($id, $user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                DELETE FROM prescription
-                WHERE id = :id AND user_id = :user_id
-            ");
-            
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':user_id', $user_id);
-            
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            add_flash_message('Error deleting prescription: ' . $e->getMessage(), 'danger');
-            return false;
+
+    public function update($id, $title, $doctor, $date, $image_data, $notes, $user_id)
+    {
+        $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
+        $data = [
+            'title' => $title,
+            'doctor' => $doctor,
+            'date' => $date,
+            'notes' => $notes,
+            'updated_at' => date('c')
+        ];
+
+        if ($image_data !== null) {
+            $data['image_data'] = $image_data;
         }
+
+        $result = $this->makeRequest('PATCH', $this->table, $data, $query);
+        return $result !== false;
+    }
+
+    public function delete($id, $user_id)
+    {
+        $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
+        $result = $this->makeRequest('DELETE', $this->table, null, $query);
+        return $result !== false;
     }
 }

@@ -64,131 +64,8 @@ Update the database.php file to load environment variables using phpdotenv.
 
 
 
-5.**Project Structure**
 
-```
-MediAssistTracker
-├─ generated-icon.png
-├─ instance
-├─ mediassist.sql
-├─ phpdotenv
-│  ├─ composer.json
-│  ├─ LICENSE
-│  └─ src
-│     ├─ Dotenv.php
-│     ├─ Exception
-│     │  ├─ ExceptionInterface.php
-│     │  ├─ InvalidEncodingException.php
-│     │  ├─ InvalidFileException.php
-│     │  ├─ InvalidPathException.php
-│     │  └─ ValidationException.php
-│     ├─ Loader
-│     │  ├─ Loader.php
-│     │  ├─ LoaderInterface.php
-│     │  └─ Resolver.php
-│     ├─ Parser
-│     │  ├─ Entry.php
-│     │  ├─ EntryParser.php
-│     │  ├─ Lexer.php
-│     │  ├─ Lines.php
-│     │  ├─ Parser.php
-│     │  ├─ ParserInterface.php
-│     │  └─ Value.php
-│     ├─ Repository
-│     │  ├─ Adapter
-│     │  │  ├─ AdapterInterface.php
-│     │  │  ├─ ApacheAdapter.php
-│     │  │  ├─ ArrayAdapter.php
-│     │  │  ├─ EnvConstAdapter.php
-│     │  │  ├─ GuardedWriter.php
-│     │  │  ├─ ImmutableWriter.php
-│     │  │  ├─ MultiReader.php
-│     │  │  ├─ MultiWriter.php
-│     │  │  ├─ PutenvAdapter.php
-│     │  │  ├─ ReaderInterface.php
-│     │  │  ├─ ReplacingWriter.php
-│     │  │  ├─ ServerConstAdapter.php
-│     │  │  └─ WriterInterface.php
-│     │  ├─ AdapterRepository.php
-│     │  ├─ RepositoryBuilder.php
-│     │  └─ RepositoryInterface.php
-│     ├─ Store
-│     │  ├─ File
-│     │  │  ├─ Paths.php
-│     │  │  └─ Reader.php
-│     │  ├─ FileStore.php
-│     │  ├─ StoreBuilder.php
-│     │  ├─ StoreInterface.php
-│     │  └─ StringStore.php
-│     ├─ Util
-│     │  ├─ Regex.php
-│     │  └─ Str.php
-│     └─ Validator.php
-├─ php_app
-│  ├─ assets
-│  │  ├─ css
-│  │  │  └─ style.css
-│  │  ├─ img
-│  │  │  ├─ auth-bg.svg
-│  │  │  ├─ icon.png
-│  │  │  └─ icon.svg
-│  │  └─ js
-│  │     ├─ main.js
-│  │     └─ notifications.js
-│  ├─ config
-│  │  ├─ .env
-│  │  ├─ config.php
-│  │  └─ database.php
-│  ├─ includes
-│  │  ├─ functions.php
-│  │  └─ models
-│  │     ├─ Appointment.php
-│  │     ├─ EmergencyContact.php
-│  │     ├─ Medication.php
-│  │     ├─ Notification.php
-│  │     ├─ Prescription.php
-│  │     └─ User.php
-│  ├─ public
-│  │  ├─ api.php
-│  │  └─ index.php
-│  └─ templates
-│     ├─ layouts
-│     │  ├─ app.php
-│     │  └─ auth.php
-│     └─ partials
-│        ├─ appointments.php
-│        ├─ contacts.php
-│        ├─ dashboard.php
-│        ├─ login_form.php
-│        ├─ medications.php
-│        ├─ prescriptions.php
-│        └─ register_form.php
-├─ php_app.php
-├─ README.md
-├─ static
-│  ├─ css
-│  │  └─ style.css
-│  └─ js
-│     ├─ appointments.js
-│     ├─ contacts.js
-│     ├─ main.js
-│     ├─ medications.js
-│     ├─ notifications.js
-│     ├─ prescriptions.js
-│     └─ theme.js
-└─ templates
-   ├─ appointments.html
-   ├─ base.html
-   ├─ contacts.html
-   ├─ index.html
-   ├─ login.html
-   ├─ medications.html
-   ├─ prescriptions.html
-   └─ register.html
-
-```
-
-6.**Usage**
+5.**Usage**
 User Authentication
 Register: Create a new account.
 Login: Access your dashboard.
@@ -207,7 +84,7 @@ Store and manage emergency contact information.
 Notifications
 Receive reminders for medications and appointments.
 
-7.**Troubleshooting**
+6.**Troubleshooting**
 
 
 Ensure the .env file is correctly configured with your database credentials.
@@ -220,3 +97,287 @@ CSS/JS Not Loading:
 
 Ensure the assets directory is accessible from the web server.
 Check the browser console for errors.
+
+
+5.**Project Structure**
+
+
+```
+MediAssistTracker
+├─ composer-setup.php
+├─ composer.json
+├─ composer.lock
+├─ Dockerfile
+├─ generated-icon.png
+├─ instance
+├─ mediassist.sql
+├─ php_app
+│  ├─ assets
+│  │  ├─ css
+│  │  │  └─ style.css
+│  │  ├─ img
+│  │  │  ├─ auth-bg.svg
+│  │  │  ├─ icon.png
+│  │  │  └─ icon.svg
+│  │  └─ js
+│  │     ├─ main.js
+│  │     └─ notifications.js
+│  ├─ config
+│  │  ├─ config.php
+│  │  ├─ database.php
+│  │  └─ load_env.php
+│  ├─ includes
+│  │  ├─ functions.php
+│  │  └─ models
+│  │     ├─ Appointment.php
+│  │     ├─ EmergencyContact.php
+│  │     ├─ Medication.php
+│  │     ├─ Notification.php
+│  │     ├─ Prescription.php
+│  │     └─ User.php
+│  ├─ public
+│  │  ├─ .env
+│  │  ├─ api.php
+│  │  └─ index.php
+│  └─ templates
+│     ├─ layouts
+│     │  ├─ app.php
+│     │  └─ auth.php
+│     └─ partials
+│        ├─ appointments.php
+│        ├─ contacts.php
+│        ├─ dashboard.php
+│        ├─ login_form.php
+│        ├─ medications.php
+│        ├─ prescriptions.php
+│        └─ register_form.php
+├─ php_app.php
+├─ README.md
+├─ start.sh
+├─ static
+│  ├─ css
+│  │  └─ style.css
+│  └─ js
+│     ├─ appointments.js
+│     ├─ contacts.js
+│     ├─ main.js
+│     ├─ medications.js
+│     ├─ notifications.js
+│     ├─ prescriptions.js
+│     └─ theme.js
+├─ templates
+│  ├─ appointments.html
+│  ├─ base.html
+│  ├─ contacts.html
+│  ├─ index.html
+│  ├─ login.html
+│  ├─ medications.html
+│  ├─ prescriptions.html
+│  └─ register.html
+├─ test_env.php
+└─ vendor
+   ├─ autoload.php
+   ├─ composer
+   │  ├─ autoload_classmap.php
+   │  ├─ autoload_files.php
+   │  ├─ autoload_namespaces.php
+   │  ├─ autoload_psr4.php
+   │  ├─ autoload_real.php
+   │  ├─ autoload_static.php
+   │  ├─ ClassLoader.php
+   │  ├─ installed.json
+   │  ├─ installed.php
+   │  ├─ InstalledVersions.php
+   │  ├─ LICENSE
+   │  └─ platform_check.php
+   ├─ graham-campbell
+   │  └─ result-type
+   │     ├─ CHANGELOG.md
+   │     ├─ composer.json
+   │     ├─ LICENSE
+   │     ├─ phpunit.xml.dist
+   │     ├─ README.md
+   │     ├─ src
+   │     │  ├─ Error.php
+   │     │  ├─ Result.php
+   │     │  └─ Success.php
+   │     └─ tests
+   │        └─ ResultTest.php
+   ├─ phpoption
+   │  └─ phpoption
+   │     ├─ composer.json
+   │     ├─ LICENSE
+   │     ├─ Makefile
+   │     ├─ phpstan-baseline.neon
+   │     ├─ phpstan.neon.dist
+   │     ├─ phpunit.xml.dist
+   │     ├─ psalm-baseline.xml
+   │     ├─ psalm.xml
+   │     ├─ README.md
+   │     ├─ src
+   │     │  └─ PhpOption
+   │     │     ├─ LazyOption.php
+   │     │     ├─ None.php
+   │     │     ├─ Option.php
+   │     │     └─ Some.php
+   │     ├─ tests
+   │     │  ├─ bootstrap.php
+   │     │  └─ PhpOption
+   │     │     └─ Tests
+   │     │        ├─ EnsureTest.php
+   │     │        ├─ LazyOptionTest.php
+   │     │        ├─ NoneTest.php
+   │     │        ├─ OptionTest.php
+   │     │        └─ SomeTest.php
+   │     └─ vendor-bin
+   │        ├─ phpstan
+   │        │  └─ composer.json
+   │        └─ psalm
+   │           └─ composer.json
+   ├─ symfony
+   │  ├─ polyfill-ctype
+   │  │  ├─ bootstrap.php
+   │  │  ├─ bootstrap80.php
+   │  │  ├─ composer.json
+   │  │  ├─ Ctype.php
+   │  │  ├─ LICENSE
+   │  │  └─ README.md
+   │  ├─ polyfill-mbstring
+   │  │  ├─ bootstrap.php
+   │  │  ├─ bootstrap80.php
+   │  │  ├─ composer.json
+   │  │  ├─ LICENSE
+   │  │  ├─ Mbstring.php
+   │  │  ├─ README.md
+   │  │  └─ Resources
+   │  │     └─ unidata
+   │  │        ├─ caseFolding.php
+   │  │        ├─ lowerCase.php
+   │  │        ├─ titleCaseRegexp.php
+   │  │        └─ upperCase.php
+   │  └─ polyfill-php80
+   │     ├─ bootstrap.php
+   │     ├─ composer.json
+   │     ├─ LICENSE
+   │     ├─ Php80.php
+   │     ├─ PhpToken.php
+   │     ├─ README.md
+   │     └─ Resources
+   │        └─ stubs
+   │           ├─ Attribute.php
+   │           ├─ PhpToken.php
+   │           ├─ Stringable.php
+   │           ├─ UnhandledMatchError.php
+   │           └─ ValueError.php
+   └─ vlucas
+      └─ phpdotenv
+         ├─ .editorconfig
+         ├─ composer.json
+         ├─ LICENSE
+         ├─ Makefile
+         ├─ phpstan-baseline.neon
+         ├─ phpstan.neon.dist
+         ├─ phpunit.xml.dist
+         ├─ psalm-baseline.xml
+         ├─ psalm.xml
+         ├─ README.md
+         ├─ src
+         │  ├─ Dotenv.php
+         │  ├─ Exception
+         │  │  ├─ ExceptionInterface.php
+         │  │  ├─ InvalidEncodingException.php
+         │  │  ├─ InvalidFileException.php
+         │  │  ├─ InvalidPathException.php
+         │  │  └─ ValidationException.php
+         │  ├─ Loader
+         │  │  ├─ Loader.php
+         │  │  ├─ LoaderInterface.php
+         │  │  └─ Resolver.php
+         │  ├─ Parser
+         │  │  ├─ Entry.php
+         │  │  ├─ EntryParser.php
+         │  │  ├─ Lexer.php
+         │  │  ├─ Lines.php
+         │  │  ├─ Parser.php
+         │  │  ├─ ParserInterface.php
+         │  │  └─ Value.php
+         │  ├─ Repository
+         │  │  ├─ Adapter
+         │  │  │  ├─ AdapterInterface.php
+         │  │  │  ├─ ApacheAdapter.php
+         │  │  │  ├─ ArrayAdapter.php
+         │  │  │  ├─ EnvConstAdapter.php
+         │  │  │  ├─ GuardedWriter.php
+         │  │  │  ├─ ImmutableWriter.php
+         │  │  │  ├─ MultiReader.php
+         │  │  │  ├─ MultiWriter.php
+         │  │  │  ├─ PutenvAdapter.php
+         │  │  │  ├─ ReaderInterface.php
+         │  │  │  ├─ ReplacingWriter.php
+         │  │  │  ├─ ServerConstAdapter.php
+         │  │  │  └─ WriterInterface.php
+         │  │  ├─ AdapterRepository.php
+         │  │  ├─ RepositoryBuilder.php
+         │  │  └─ RepositoryInterface.php
+         │  ├─ Store
+         │  │  ├─ File
+         │  │  │  ├─ Paths.php
+         │  │  │  └─ Reader.php
+         │  │  ├─ FileStore.php
+         │  │  ├─ StoreBuilder.php
+         │  │  ├─ StoreInterface.php
+         │  │  └─ StringStore.php
+         │  ├─ Util
+         │  │  ├─ Regex.php
+         │  │  └─ Str.php
+         │  └─ Validator.php
+         ├─ tests
+         │  ├─ Dotenv
+         │  │  ├─ DotenvTest.php
+         │  │  ├─ Loader
+         │  │  │  └─ LoaderTest.php
+         │  │  ├─ Parser
+         │  │  │  ├─ EntryParserTest.php
+         │  │  │  ├─ LexerTest.php
+         │  │  │  ├─ LinesTest.php
+         │  │  │  └─ ParserTest.php
+         │  │  ├─ Repository
+         │  │  │  ├─ Adapter
+         │  │  │  │  ├─ ArrayAdapterTest.php
+         │  │  │  │  ├─ EnvConstAdapterTest.php
+         │  │  │  │  ├─ PutenvAdapterTest.php
+         │  │  │  │  └─ ServerConstAdapterTest.php
+         │  │  │  └─ RepositoryTest.php
+         │  │  ├─ Store
+         │  │  │  └─ StoreTest.php
+         │  │  └─ ValidatorTest.php
+         │  └─ fixtures
+         │     └─ env
+         │        ├─ .env
+         │        ├─ assertions.env
+         │        ├─ booleans.env
+         │        ├─ commented.env
+         │        ├─ empty.env
+         │        ├─ example.env
+         │        ├─ exported.env
+         │        ├─ immutable.env
+         │        ├─ integers.env
+         │        ├─ large.env
+         │        ├─ multibyte.env
+         │        ├─ multiline.env
+         │        ├─ multiple.env
+         │        ├─ mutable.env
+         │        ├─ nested.env
+         │        ├─ quoted.env
+         │        ├─ specialchars.env
+         │        ├─ unicodevarnames.env
+         │        ├─ utf8-with-bom-encoding.env
+         │        └─ windows.env
+         ├─ UPGRADING.md
+         └─ vendor-bin
+            ├─ phpstan
+            │  └─ composer.json
+            └─ psalm
+               └─ composer.json
+
+```

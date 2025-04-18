@@ -1,44 +1,72 @@
 <?php
+
 /**
- * Medication Model
+ * Medication Model (Supabase Version)
  */
 
-class Medication {
-    private $db;
-    
-    /**
-     * Constructor
-     *
-     * @param PDO $db Database connection
-     */
-    public function __construct($db) {
-        $this->db = $db;
+class Medication
+{
+    private $supabaseUrl;
+    private $supabaseKey;
+    private $table = 'medication';
+
+    public function __construct($supabaseUrl, $supabaseKey)
+    {
+        $this->supabaseUrl = $supabaseUrl;
+        $this->supabaseKey = $supabaseKey;
     }
-    
+
+    private function makeRequest($method, $endpoint, $data = null, $queryParams = '')
+    {
+        $url = "$this->supabaseUrl/rest/v1/$endpoint$queryParams";
+
+        $headers = [
+            "apikey: $this->supabaseKey",
+            "Authorization: Bearer $this->supabaseKey",
+            "Content-Type: application/json",
+            "Prefer: return=representation"
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        if ($method === 'POST') {
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        } elseif ($method === 'PATCH') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        } elseif ($method === 'DELETE') {
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        }
+
+        $response = curl_exec($ch);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            add_flash_message("cURL Error: $error", 'danger');
+            return false;
+        }
+
+        return json_decode($response, true);
+    }
+
     /**
      * Get all medications for a user
      *
      * @param int $user_id User ID
      * @return array|bool Array of medications if successful, false otherwise
      */
-    public function getAll($user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                SELECT * FROM medication
-                WHERE user_id = :user_id
-                ORDER BY name ASC
-            ");
-            
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->execute();
-            
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            add_flash_message('Error fetching medications: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+    public function getAll($user_id)
+    {
+        $query = "?user_id=eq." . urlencode($user_id);
+        $result = $this->makeRequest('GET', $this->table, null, $query);
+
+        return $result ?: false;
     }
-    
+
     /**
      * Get a medication by ID
      *
@@ -46,24 +74,14 @@ class Medication {
      * @param int $user_id User ID (for security)
      * @return array|bool Medication data if found, false otherwise
      */
-    public function getById($id, $user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                SELECT * FROM medication
-                WHERE id = :id AND user_id = :user_id
-            ");
-            
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->execute();
-            
-            return $stmt->fetch();
-        } catch (PDOException $e) {
-            add_flash_message('Error fetching medication: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+    public function getById($id, $user_id)
+    {
+        $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
+        $result = $this->makeRequest('GET', $this->table, null, $query);
+
+        return $result[0] ?? false;
     }
-    
+
     /**
      * Create a new medication
      *
@@ -75,32 +93,29 @@ class Medication {
      * @param int $user_id User ID
      * @return int|bool Medication ID if successful, false otherwise
      */
-    public function create($name, $dosage, $frequency, $times, $notes, $user_id) {
-        try {
-            $time_json = json_encode($times);
-            
-            $stmt = $this->db->prepare("
-                INSERT INTO medication (name, dosage, frequency, time, notes, user_id)
-                VALUES (:name, :dosage, :frequency, :time, :notes, :user_id)
-                RETURNING id
-            ");
-            
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':dosage', $dosage);
-            $stmt->bindParam(':frequency', $frequency);
-            $stmt->bindParam(':time', $time_json);
-            $stmt->bindParam(':notes', $notes);
-            $stmt->bindParam(':user_id', $user_id);
-            
-            $stmt->execute();
-            
-            return $stmt->fetchColumn();
-        } catch (PDOException $e) {
-            add_flash_message('Error creating medication: ' . $e->getMessage(), 'danger');
-            return false;
+    public function create($name, $dosage, $frequency, $times, $notes, $user_id)
+    {
+        $time_json = json_encode($times);
+
+        $data = [
+            'name' => $name,
+            'dosage' => $dosage,
+            'frequency' => $frequency,
+            'time' => $time_json,
+            'notes' => $notes,
+            'user_id' => $user_id
+        ];
+
+        $result = $this->makeRequest('POST', $this->table, $data);
+
+        if (isset($result[0]['id'])) {
+            return $result[0]['id'];
         }
+
+        add_flash_message('Error creating medication.', 'danger');
+        return false;
     }
-    
+
     /**
      * Update a medication
      *
@@ -113,32 +128,24 @@ class Medication {
      * @param int $user_id User ID (for security)
      * @return bool True if successful, false otherwise
      */
-    public function update($id, $name, $dosage, $frequency, $times, $notes, $user_id) {
-        try {
-            $time_json = json_encode($times);
-            
-            $stmt = $this->db->prepare("
-                UPDATE medication
-                SET name = :name, dosage = :dosage, frequency = :frequency,
-                    time = :time, notes = :notes, updated_at = NOW()
-                WHERE id = :id AND user_id = :user_id
-            ");
-            
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':dosage', $dosage);
-            $stmt->bindParam(':frequency', $frequency);
-            $stmt->bindParam(':time', $time_json);
-            $stmt->bindParam(':notes', $notes);
-            $stmt->bindParam(':user_id', $user_id);
-            
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            add_flash_message('Error updating medication: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+    public function update($id, $name, $dosage, $frequency, $times, $notes, $user_id)
+    {
+        $time_json = json_encode($times);
+
+        $data = [
+            'name' => $name,
+            'dosage' => $dosage,
+            'frequency' => $frequency,
+            'time' => $time_json,
+            'notes' => $notes
+        ];
+
+        $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
+        $result = $this->makeRequest('PATCH', $this->table, $data, $query);
+
+        return $result ? true : false;
     }
-    
+
     /**
      * Delete a medication
      *
@@ -146,20 +153,11 @@ class Medication {
      * @param int $user_id User ID (for security)
      * @return bool True if successful, false otherwise
      */
-    public function delete($id, $user_id) {
-        try {
-            $stmt = $this->db->prepare("
-                DELETE FROM medication
-                WHERE id = :id AND user_id = :user_id
-            ");
-            
-            $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':user_id', $user_id);
-            
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            add_flash_message('Error deleting medication: ' . $e->getMessage(), 'danger');
-            return false;
-        }
+    public function delete($id, $user_id)
+    {
+        $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
+        $result = $this->makeRequest('DELETE', $this->table, null, $query);
+
+        return $result ? true : false;
     }
 }
