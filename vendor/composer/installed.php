@@ -3,7 +3,7 @@
         'name' => 'amineh/medassist-backend',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5fa3438e21fcf56415ddada261e17487d4cf3796',
+        'reference' => 'c3fe6305a331aa04ae76f5a8787c00bebe9b5b42',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'amineh/medassist-backend' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5fa3438e21fcf56415ddada261e17487d4cf3796',
+            'reference' => 'c3fe6305a331aa04ae76f5a8787c00bebe9b5b42',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

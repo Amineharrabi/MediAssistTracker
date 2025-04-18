@@ -1,13 +1,7 @@
 <?php
-
-/**
- * MediAssist - Main Entry Point
- */
-
-echo "Index.php is working!";
 require_once dirname(__DIR__) . '/config/config.php';
 echo getenv('DB_HOST');
-// Load model classes
+echo "Index.php is working!";
 require_once INCLUDES_PATH . '/models/User.php';
 require_once INCLUDES_PATH . '/models/Medication.php';
 require_once INCLUDES_PATH . '/models/Appointment.php';
