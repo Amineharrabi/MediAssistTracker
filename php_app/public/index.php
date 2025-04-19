@@ -91,7 +91,8 @@ switch ($route) {
         render('layouts/auth.php', [
             'page_title' => $page_title,
             'page_content' => 'partials/register_form.php',
-            'flash_messages' => $flash_messages
+            'flash_messages' => $flash_messages,
+            'route' => $route
         ]);
         break;
 
