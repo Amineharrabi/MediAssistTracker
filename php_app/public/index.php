@@ -6,7 +6,6 @@ require_once INCLUDES_PATH . '/models/Appointment.php';
 require_once INCLUDES_PATH . '/models/Prescription.php';
 require_once INCLUDES_PATH . '/models/EmergencyContact.php';
 require_once INCLUDES_PATH . '/models/Notification.php';
-require_once INCLUDES_PATH . '/models/Notification.php';
 require_once __DIR__ . '/../config/load_env.php';
 
 
