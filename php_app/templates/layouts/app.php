@@ -195,13 +195,9 @@
                             <span class="d-none d-md-inline"><?php echo $_SESSION['username'] ?? 'User'; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><?php echo $route === 'profile' ? 'active' : ''; ?>" href="/index.php?route=profile"><i class="fas fa-user-cog me-1"></i> Profile</a></li>
-                            <li> <a class="dropdown-item <?php echo $route === 'settings' ? 'active' : ''; ?>" href="/index.php?route=settings">
-                                    <i class="fas fa-cog me-1"></i> Settings</a></li>
-                            <li>
-
-                                <hr class="dropdown-divider">
-                            </li>
+                            <li><a class="dropdown-item <?php echo $route === 'profile' ? 'active' : ''; ?>" href="/index.php?route=profile"><i class="fas fa-user-cog me-1"></i> Profile</a></li>
+                            <li><a class="dropdown-item <?php echo $route === 'settings' ? 'active' : ''; ?>" href="/index.php?route=settings"><i class="fas fa-cog me-1"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/index.php?route=logout"><i class="fas fa-sign-out-alt me-1"></i> Logout</a></li>
                         </ul>
                     </li>

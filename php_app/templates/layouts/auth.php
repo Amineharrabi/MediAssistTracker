@@ -113,6 +113,24 @@
             font-weight: bold;
             color: var(--heading-color);
         }
+
+        .flash-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 300px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .flash-message .close {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -120,14 +138,12 @@
     <div class="auth-container">
         <!-- Flash Messages -->
         <?php if (!empty($flash_messages)): ?>
-            <div id="flash-messages">
-                <?php foreach ($flash_messages as $message): ?>
-                    <div class="alert alert-<?php echo $message['type']; ?> alert-dismissible fade show" role="alert">
-                        <?php echo $message['message']; ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <?php foreach ($flash_messages as $message): ?>
+                <div class="flash-message alert alert-<?php echo htmlspecialchars($message['type']); ?> alert-dismissible fade show" role="alert">
+                    <?php echo htmlspecialchars($message['message']); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endforeach; ?>
         <?php endif; ?>
 
         <div class="card shadow">
@@ -168,6 +184,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom notifications script -->
+    <script src="/js/notifications.js"></script>
 </body>
 
 </html>

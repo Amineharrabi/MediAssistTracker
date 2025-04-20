@@ -14,7 +14,8 @@ function add_flash_message($message, $type = 'info')
 
     $_SESSION['flash_messages'][] = [
         'message' => $message,
-        'type' => $type
+        'type' => $type,
+        'timestamp' => time()
     ];
 }
 
@@ -22,8 +23,14 @@ function add_flash_message($message, $type = 'info')
 function get_flash_messages()
 {
     $messages = $_SESSION['flash_messages'] ?? [];
-    $_SESSION['flash_messages'] = [];
+    unset($_SESSION['flash_messages']);
     return $messages;
+}
+
+
+function has_flash_messages()
+{
+    return !empty($_SESSION['flash_messages']);
 }
 
 

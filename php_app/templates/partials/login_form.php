@@ -2,12 +2,12 @@
 
 <form method="POST" action="/index.php?route=login" class="needs-validation" novalidate>
     <div class="mb-3">
-        <label for="username_or_email" class="form-label">Username or Email</label>
+        <label for="email" class="form-label">Email</label>
         <div class="input-group">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
-            <input type="text" class="form-control" id="username_or_email" name="username_or_email" placeholder="Enter username or email" required autofocus>
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required autofocus>
         </div>
-        <div class="invalid-feedback">Please enter your username or email.</div>
+        <div class="invalid-feedback">Please enter your email.</div>
     </div>
 
     <div class="mb-4">

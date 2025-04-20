@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once dirname(__DIR__) . '/config/config.php';
 require_once INCLUDES_PATH . '/models/User.php';
 require_once INCLUDES_PATH . '/models/Medication.php';
@@ -7,7 +11,6 @@ require_once INCLUDES_PATH . '/models/Prescription.php';
 require_once INCLUDES_PATH . '/models/EmergencyContact.php';
 require_once INCLUDES_PATH . '/models/Notification.php';
 require_once __DIR__ . '/../config/load_env.php';
-
 
 $userModel = new User($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 $medicationModel = new Medication($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
@@ -58,8 +61,8 @@ switch ($route) {
 
             if (empty($password)) {
                 $errors[] = 'Password is required.';
-            } elseif (strlen($password) < 8) {
-                $errors[] = 'Password must be at least 8 characters.';
+            } elseif (strlen($password) < 6) {
+                $errors[] = 'Password must be at least 6 characters.';
             }
 
             if ($password !== $password_confirm) {
@@ -67,11 +70,21 @@ switch ($route) {
             }
 
             if (empty($errors)) {
-                $result = $userModel->create($username, $email, $password);
+                try {
+                    $result = $userModel->create($username, $email, $password);
 
-                if ($result) {
-                    add_flash_message('Account created successfully! Please log in.', 'success');
-                    redirect('/index.php?route=login');
+                    if ($result) {
+                        add_flash_message('Account created successfully! Please check your email for verification.', 'success');
+                        render('layouts/auth.php', [
+                            'page_title' => $page_title,
+                            'page_content' => 'partials/register_form.php',
+                            'flash_messages' => get_flash_messages(),
+                            'route' => $route
+                        ]);
+                        exit;
+                    }
+                } catch (Exception $e) {
+                    add_flash_message($e->getMessage(), 'danger');
                 }
             } else {
                 foreach ($errors as $error) {
@@ -83,32 +96,36 @@ switch ($route) {
         render('layouts/auth.php', [
             'page_title' => $page_title,
             'page_content' => 'partials/register_form.php',
-            'flash_messages' => $flash_messages,
+            'flash_messages' => get_flash_messages(),
             'route' => $route
         ]);
         break;
 
     case 'login':
         if (is_logged_in()) {
-            redirect('/');
+            redirect('/index.php?route=home');
         }
 
         $page_title = 'Login - MediAssist';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username_or_email = sanitize($_POST['username_or_email'] ?? '');
+            $email = sanitize($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';
 
-            if (empty($username_or_email) || empty($password)) {
-                add_flash_message('Both username/email and password are required.', 'danger');
+            if (empty($email) || empty($password)) {
+                add_flash_message('Both email and password are required.', 'danger');
             } else {
-                $result = $userModel->login($username_or_email, $password);
+                try {
+                    $result = $userModel->login($email, $password);
 
-                if ($result) {
-                    add_flash_message('Login successful!', 'success');
-                    redirect('/');
-                } else {
-                    add_flash_message('Invalid username/email or password.', 'danger');
+                    if ($result) {
+                        add_flash_message('Login successful!', 'success');
+                        redirect('/index.php?route=home');
+                    } else {
+                        add_flash_message('Invalid email or password.', 'danger');
+                    }
+                } catch (Exception $e) {
+                    add_flash_message($e->getMessage(), 'danger');
                 }
             }
         }
@@ -116,7 +133,7 @@ switch ($route) {
         render('layouts/auth.php', [
             'page_title' => $page_title,
             'page_content' => 'partials/login_form.php',
-            'flash_messages' => $flash_messages,
+            'flash_messages' => get_flash_messages(),
             'route' => $route
         ]);
         break;
@@ -186,6 +203,36 @@ switch ($route) {
             'page_content' => 'partials/contacts.php',
             'flash_messages' => $flash_messages,
             'contacts' => $contacts ?: [],
+            'route' => $route
+        ]);
+        break;
+
+    case 'profile':
+        require_login();
+        $page_title = 'Profile - MediAssist';
+
+        $user = $userModel->findById(get_user_id());
+
+        render('layouts/app.php', [
+            'page_title' => $page_title,
+            'page_content' => 'partials/profile.php',
+            'flash_messages' => $flash_messages,
+            'user' => $user,
+            'route' => $route
+        ]);
+        break;
+
+    case 'settings':
+        require_login();
+        $page_title = 'Settings - MediAssist';
+
+        $user = $userModel->findById(get_user_id());
+
+        render('layouts/app.php', [
+            'page_title' => $page_title,
+            'page_content' => 'partials/settings.php',
+            'flash_messages' => $flash_messages,
+            'user' => $user,
             'route' => $route
         ]);
         break;

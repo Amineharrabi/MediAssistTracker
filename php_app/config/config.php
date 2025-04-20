@@ -1,5 +1,5 @@
 <?php
-session_start();
+// Session is started in index.php
 define('ROOT_PATH', dirname(__DIR__));
 define('TEMPLATE_PATH', ROOT_PATH . '/templates');
 define('INCLUDES_PATH', ROOT_PATH . '/includes');
