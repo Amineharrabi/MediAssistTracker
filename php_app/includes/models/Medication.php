@@ -1,6 +1,4 @@
 <?php
-
-
 class Medication
 {
     private $supabaseUrl;

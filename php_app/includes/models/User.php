@@ -1,6 +1,4 @@
 <?php
-
-
 class User {
     private $supabaseUrl;
     private $supabaseKey;

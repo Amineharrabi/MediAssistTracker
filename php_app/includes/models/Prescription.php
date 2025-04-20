@@ -1,7 +1,4 @@
 <?php
-
-
-
 class Prescription
 {
     private $supabaseUrl;

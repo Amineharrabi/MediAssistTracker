@@ -1,7 +1,4 @@
 <?php
-
-
-
 class EmergencyContact
 {
     private $supabaseUrl;

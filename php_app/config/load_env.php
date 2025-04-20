@@ -1,7 +1,5 @@
 <?php
-
 $envPath = __DIR__ . '/../public/.env';
-
 if (!file_exists($envPath)) {
     die(".env file not found at $envPath");
 }
@@ -15,8 +13,8 @@ foreach ($lines as $line) {
 
     list($key, $value) = explode('=', $line, 2);
     $key = trim($key);
-    $value = trim($value, " \t\n\r\0\x0B\"'"); 
+    $value = trim($value, " \t\n\r\0\x0B\"'");
 
     $_ENV[$key] = $value;
-    putenv("$key=$value"); 
+    putenv("$key=$value");
 }
