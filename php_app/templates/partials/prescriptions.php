@@ -6,7 +6,7 @@
                     <h2 class="card-title">
                         <i class="fa-solid fa-file-waveform me-2"></i> Prescriptions
                     </h2>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
+                    <button type="button" class="btn btn-primary"  style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Prescription
                     </button>
                 </div>
@@ -24,7 +24,7 @@
                     <i class="fas fa-file-medical fa-4x mb-3 text-muted"></i>
                     <h5 class="text-muted mb-3">No prescriptions found</h5>
                     <p class="mb-4">You haven't added any prescriptions yet.</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
+                    <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Your First Prescription
                     </button>
                 </div>
@@ -38,7 +38,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="mb-0"><?php echo htmlspecialchars($prescription['title']); ?></h5>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -92,7 +92,7 @@
 
                         <?php if (!empty($prescription['image_data'])): ?>
                             <div class="mt-3 text-center">
-                                <button class="btn btn-sm btn-outline-primary view-prescription" data-id="<?php echo $prescription['id']; ?>">
+                                <button class="btn btn-sm btn-outline-primary view-prescription" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-id="<?php echo $prescription['id']; ?>">
                                     <i class="fas fa-image me-1"></i> View Image
                                 </button>
                             </div>
@@ -149,7 +149,7 @@
                         <div id="image-preview-container" class="mt-2 text-center" style="display: none;">
                             <img id="image-preview" class="img-thumbnail" style="max-height: 200px;" alt="Prescription preview">
                             <div class="mt-2">
-                                <button type="button" class="btn btn-sm btn-outline-danger" id="remove-image">
+                                <button type="button" class="btn btn-sm btn-outline-danger" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="remove-image">
                                     <i class="fas fa-times"></i> Remove Image
                                 </button>
                             </div>
@@ -163,8 +163,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="save-prescription">Save</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="save-prescription">Save</button>
             </div>
         </div>
     </div>
@@ -215,8 +215,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="edit-from-view">Edit</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="edit-from-view">Edit</button>
             </div>
         </div>
     </div>
@@ -237,8 +237,8 @@
                 <p class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i> This action cannot be undone.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirm-delete-prescription">Delete</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="confirm-delete-prescription">Delete</button>
             </div>
         </div>
     </div>
@@ -350,7 +350,7 @@
                             <i class="fas fa-file-medical fa-4x mb-3 text-muted"></i>
                             <h5 class="text-muted mb-3">No prescriptions found</h5>
                             <p class="mb-4">You haven't added any prescriptions yet.</p>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
+                            <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addPrescriptionModal">
                                 <i class="fas fa-plus-circle me-1"></i> Add Your First Prescription
                             </button>
                         </div>
@@ -370,7 +370,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">${escapeHtml(prescription.title)}</h5>
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
@@ -424,7 +424,7 @@
                             
                             ${prescription.image_data ? `
                                 <div class="mt-3 text-center">
-                                    <button class="btn btn-sm btn-outline-primary view-prescription" data-id="${prescription.id}">
+                                    <button class="btn btn-sm btn-outline-primary view-prescription"  style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-id="${prescription.id}">
                                         <i class="fas fa-image me-1"></i> View Image
                                     </button>
                                 </div>

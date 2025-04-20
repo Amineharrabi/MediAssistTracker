@@ -133,7 +133,7 @@ function updateNotificationDropdown(notifications) {
                     <strong>${notification.message}</strong>
                     <div class="text-muted small">${timeFormatted}</div>
                 </div>
-                <button class="btn btn-sm btn-link text-muted mark-read" data-id="${notification.id}" title="Mark as read">
+                <button class="btn btn-sm btn-link text-muted mark-read" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-id="${notification.id}" title="Mark as read">
                     <i class="fas fa-check"></i>
                 </button>
             </div>

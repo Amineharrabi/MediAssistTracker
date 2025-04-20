@@ -68,7 +68,7 @@ function displayAppointments(appointments) {
                 </div>
                 <h5>No appointments scheduled</h5>
                 <p class="text-muted">Schedule your first appointment to get started</p>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-appointment-modal">
+                <button class="btn btn-primary" data-bs-toggle="modal" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-target="#add-appointment-modal">
                     <i class="fas fa-plus"></i> Schedule Appointment
                 </button>
             </div>
@@ -139,7 +139,7 @@ function displayAppointments(appointments) {
                     </div>
                     <div class="ms-2">
                         <div class="dropdown">
-                            <button class="btn btn-sm btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-sm btn-link" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -182,7 +182,7 @@ function displayAppointments(appointments) {
     const addBtnContainer = document.createElement('div');
     addBtnContainer.className = 'text-center mt-4';
     addBtnContainer.innerHTML = `
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-appointment-modal">
+        <button class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#add-appointment-modal">
             <i class="fas fa-plus"></i> Schedule Appointment
         </button>
     `;

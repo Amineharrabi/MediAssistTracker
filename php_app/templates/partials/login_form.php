@@ -9,21 +9,21 @@
         </div>
         <div class="invalid-feedback">Please enter your username or email.</div>
     </div>
-    
+
     <div class="mb-4">
         <label for="password" class="form-label">Password</label>
         <div class="input-group">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
             <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-            <button class="btn btn-outline-secondary toggle-password" type="button">
+            <button class="btn btn-outline-secondary toggle-password" type="button" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                 <i class="fas fa-eye"></i>
             </button>
         </div>
         <div class="invalid-feedback">Please enter your password.</div>
     </div>
-    
+
     <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-primary btn-lg">
+        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
             <i class="fas fa-sign-in-alt me-2"></i> Login
         </button>
     </div>
@@ -35,7 +35,7 @@
         button.addEventListener('click', function() {
             const input = this.closest('.input-group').querySelector('input');
             const icon = this.querySelector('i');
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye');
@@ -47,18 +47,18 @@
             }
         });
     });
-    
+
     // Form validation
     document.addEventListener('DOMContentLoaded', function() {
         const forms = document.querySelectorAll('.needs-validation');
-        
+
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', event => {
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
-                
+
                 form.classList.add('was-validated');
             }, false);
         });

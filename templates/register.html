@@ -1,204 +1,375 @@
-{% extends 'base.html' %}
-
-{% block title %}MediAssist - Register{% endblock %}
-
+{% extends 'base.html' %} {% block title %}MediAssist - Register{% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col-md-6 offset-md-3 animate-fade-in">
-        <div class="card shadow">
-            <div class="card-body p-4">
-                <div class="text-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-3">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    <h3 class="card-title mb-1">Create an Account</h3>
-                    <p class="text-muted">Sign up to start managing your health with MediAssist</p>
-                </div>
-                
-                <form method="post" action="{{ url_for('register') }}" id="register-form">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" required autofocus>
-                        </div>
-                        <div class="invalid-feedback">Please choose a username.</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="invalid-feedback">Please enter a valid email address.</div>
-                        <div class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" required 
-                                   minlength="6" aria-describedby="passwordHelp">
-                            <button class="btn btn-outline-secondary" type="button" id="toggle-password">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="invalid-feedback">Password must be at least 6 characters.</div>
-                        <div id="passwordHelp" class="form-text">Your password should be at least 6 characters.</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="password_confirm" class="form-label">Confirm Password</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
-                        </div>
-                        <div class="invalid-feedback">Passwords do not match.</div>
-                    </div>
-                    
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
-                        <label class="form-check-label" for="terms">
-                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
-                        </label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                    </div>
-                    
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
-                    </div>
-                </form>
-                
-                <div class="text-center mt-4">
-                    <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
-                </div>
-            </div>
+  <div class="col-md-6 offset-md-3 animate-fade-in">
+    <div class="card shadow">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-primary mb-3"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <h3 class="card-title mb-1">Create an Account</h3>
+          <p class="text-muted">
+            Sign up to start managing your health with MediAssist
+          </p>
         </div>
+
+        <form
+          method="post"
+          action="{{ url_for('register') }}"
+          id="register-form"
+        >
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                required
+                autofocus
+              />
+            </div>
+            <div class="invalid-feedback">Please choose a username.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <div class="input-group">
+              <span class="input-group-text"
+                ><i class="fas fa-envelope"></i
+              ></span>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
+            <div class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+                minlength="6"
+                aria-describedby="passwordHelp"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                style="
+                  background-color: #1a9b6c;
+                  border-color: #1a9b6c;
+                  color: white;
+                "
+                type="button"
+                id="toggle-password"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback">
+              Password must be at least 6 characters.
+            </div>
+            <div id="passwordHelp" class="form-text">
+              Your password should be at least 6 characters.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password_confirm" class="form-label"
+              >Confirm Password</label
+            >
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              <input
+                type="password"
+                class="form-control"
+                id="password_confirm"
+                name="password_confirm"
+                required
+              />
+            </div>
+            <div class="invalid-feedback">Passwords do not match.</div>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="terms"
+              name="terms"
+              required
+            />
+            <label class="form-check-label" for="terms">
+              I agree to the
+              <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal"
+                >Terms of Service</a
+              >
+              and
+              <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal"
+                >Privacy Policy</a
+              >
+            </label>
+            <div class="invalid-feedback">
+              You must agree before submitting.
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              style="
+                background-color: #1a9b6c;
+                border-color: #1a9b6c;
+                color: white;
+              "
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+
+        <div class="text-center mt-4">
+          <p>
+            Already have an account?
+            <a href="{{ url_for('login') }}">Sign in</a>
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Terms of Service Modal -->
-<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5>1. Acceptance of Terms</h5>
-                <p>By accessing and using MediAssist, you agree to be bound by these Terms of Service.</p>
-                
-                <h5>2. Description of Service</h5>
-                <p>MediAssist provides a platform for users to manage medications, medical appointments, prescriptions, and emergency contacts.</p>
-                
-                <h5>3. User Responsibilities</h5>
-                <p>You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
-                
-                <h5>4. Medical Disclaimer</h5>
-                <p>MediAssist is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
-                
-                <h5>5. Privacy</h5>
-                <p>Your privacy is important to us. Please review our Privacy Policy to understand how we collect, use, and disclose information.</p>
-                
-                <h5>6. Termination</h5>
-                <p>We reserve the right to terminate or suspend your account and access to MediAssist at our sole discretion, without notice, for conduct that we believe violates these Terms of Service or is harmful to other users of MediAssist, us, or third parties, or for any other reason.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
-            </div>
-        </div>
+<div
+  class="modal fade"
+  id="termsModal"
+  tabindex="-1"
+  aria-labelledby="termsModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h5>1. Acceptance of Terms</h5>
+        <p>
+          By accessing and using MediAssist, you agree to be bound by these
+          Terms of Service.
+        </p>
+
+        <h5>2. Description of Service</h5>
+        <p>
+          MediAssist provides a platform for users to manage medications,
+          medical appointments, prescriptions, and emergency contacts.
+        </p>
+
+        <h5>3. User Responsibilities</h5>
+        <p>
+          You are responsible for maintaining the confidentiality of your
+          account information and for all activities that occur under your
+          account.
+        </p>
+
+        <h5>4. Medical Disclaimer</h5>
+        <p>
+          MediAssist is not a substitute for professional medical advice,
+          diagnosis, or treatment. Always seek the advice of your physician or
+          other qualified health provider with any questions you may have
+          regarding a medical condition.
+        </p>
+
+        <h5>5. Privacy</h5>
+        <p>
+          Your privacy is important to us. Please review our Privacy Policy to
+          understand how we collect, use, and disclose information.
+        </p>
+
+        <h5>6. Termination</h5>
+        <p>
+          We reserve the right to terminate or suspend your account and access
+          to MediAssist at our sole discretion, without notice, for conduct that
+          we believe violates these Terms of Service or is harmful to other
+          users of MediAssist, us, or third parties, or for any other reason.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          style="background-color: #1a9b6c; border-color: #1a9b6c; color: white"
+        >
+          I Understand
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Privacy Policy Modal -->
-<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5>1. Information We Collect</h5>
-                <p>We collect information you provide directly to us, such as when you create an account, update your profile, use the interactive features of our service, participate in a contest, promotion, survey, or request customer support.</p>
-                
-                <h5>2. How We Use Your Information</h5>
-                <p>We use the information we collect to provide, maintain, and improve our services, to process your requests, and to send you technical notices, updates, security alerts, and support and administrative messages.</p>
-                
-                <h5>3. Information Sharing</h5>
-                <p>We do not share your personal information except in limited circumstances, such as when required by law or to protect our rights.</p>
-                
-                <h5>4. Data Security</h5>
-                <p>We take reasonable measures to help protect your personal information from loss, theft, misuse, unauthorized access, disclosure, alteration, and destruction.</p>
-                
-                <h5>5. Your Choices</h5>
-                <p>You may update, correct, or delete your account information at any time by logging into your account. You may also request deletion of your account by contacting us.</p>
-                
-                <h5>6. Changes to this Policy</h5>
-                <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<div
+  class="modal fade"
+  id="privacyModal"
+  tabindex="-1"
+  aria-labelledby="privacyModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h5>1. Information We Collect</h5>
+        <p>
+          We collect information you provide directly to us, such as when you
+          create an account, update your profile, use the interactive features
+          of our service, participate in a contest, promotion, survey, or
+          request customer support.
+        </p>
 
-{% block scripts %}
+        <h5>2. How We Use Your Information</h5>
+        <p>
+          We use the information we collect to provide, maintain, and improve
+          our services, to process your requests, and to send you technical
+          notices, updates, security alerts, and support and administrative
+          messages.
+        </p>
+
+        <h5>3. Information Sharing</h5>
+        <p>
+          We do not share your personal information except in limited
+          circumstances, such as when required by law or to protect our rights.
+        </p>
+
+        <h5>4. Data Security</h5>
+        <p>
+          We take reasonable measures to help protect your personal information
+          from loss, theft, misuse, unauthorized access, disclosure, alteration,
+          and destruction.
+        </p>
+
+        <h5>5. Your Choices</h5>
+        <p>
+          You may update, correct, or delete your account information at any
+          time by logging into your account. You may also request deletion of
+          your account by contacting us.
+        </p>
+
+        <h5>6. Changes to this Policy</h5>
+        <p>
+          We may update this privacy policy from time to time. We will notify
+          you of any changes by posting the new privacy policy on this page.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          style="background-color: #1a9b6c; border-color: #1a9b6c; color: white"
+        >
+          I Understand
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // Form validation
-    const form = document.getElementById('register-form');
-    const password = document.getElementById('password');
-    const passwordConfirm = document.getElementById('password_confirm');
-    
+    const form = document.getElementById("register-form");
+    const password = document.getElementById("password");
+    const passwordConfirm = document.getElementById("password_confirm");
+
     if (form) {
-        form.addEventListener('submit', function(event) {
-            let isValid = true;
-            
-            // Check if passwords match
-            if (password.value !== passwordConfirm.value) {
-                passwordConfirm.classList.add('is-invalid');
-                isValid = false;
-            } else {
-                passwordConfirm.classList.remove('is-invalid');
-            }
-            
-            // Prevent form submission if validation fails
-            if (!isValid) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        });
+      form.addEventListener("submit", function (event) {
+        let isValid = true;
+
+        // Check if passwords match
+        if (password.value !== passwordConfirm.value) {
+          passwordConfirm.classList.add("is-invalid");
+          isValid = false;
+        } else {
+          passwordConfirm.classList.remove("is-invalid");
+        }
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      });
     }
-    
+
     // Password visibility toggle
-    const togglePasswordBtn = document.getElementById('toggle-password');
-    
+    const togglePasswordBtn = document.getElementById("toggle-password");
+
     if (togglePasswordBtn && password) {
-        togglePasswordBtn.addEventListener('click', function() {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            passwordConfirm.setAttribute('type', type);
-            
-            // Toggle icon
-            const icon = this.querySelector('i');
-            if (type === 'password') {
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            } else {
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            }
-        });
+      togglePasswordBtn.addEventListener("click", function () {
+        const type =
+          password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        passwordConfirm.setAttribute("type", type);
+
+        // Toggle icon
+        const icon = this.querySelector("i");
+        if (type === "password") {
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        } else {
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        }
+      });
     }
-});
+  });
 </script>
 {% endblock %}

@@ -57,7 +57,7 @@ function displayContacts(contacts) {
                 </div>
                 <h5>No emergency contacts added yet</h5>
                 <p class="text-muted">Add your first emergency contact to get started</p>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-contact-modal">
+                <button class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#add-contact-modal">
                     <i class="fas fa-plus"></i> Add Emergency Contact
                 </button>
             </div>
@@ -80,7 +80,7 @@ function displayContacts(contacts) {
                     <div class="d-flex justify-content-between align-items-start">
                         <h5 class="card-title">${contact.name}</h5>
                         <div class="dropdown">
-                            <button class="btn btn-sm btn-link text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-sm btn-link text-dark" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -96,11 +96,11 @@ function displayContacts(contacts) {
                     ${contact.email ? `<p class="email mb-2"><i class="fas fa-envelope me-2"></i>${contact.email}</p>` : ''}
                     ${contact.notes ? `<p class="notes text-muted small mt-2">${contact.notes}</p>` : ''}
                     <div class="mt-3">
-                        <a href="tel:${contact.phone}" class="btn btn-success btn-sm me-1">
+                        <a href="tel:${contact.phone}" class="btn btn-success btn-sm me-1" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             <i class="fas fa-phone"></i> Call
                         </a>
                         ${contact.email ? `
-                            <a href="mailto:${contact.email}" class="btn btn-primary btn-sm">
+                            <a href="mailto:${contact.email}" class="btn btn-primary btn-sm" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                 <i class="fas fa-envelope"></i> Email
                             </a>
                         ` : ''}
@@ -138,7 +138,7 @@ function displayContacts(contacts) {
     const addBtnContainer = document.createElement('div');
     addBtnContainer.className = 'text-center mt-4';
     addBtnContainer.innerHTML = `
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-contact-modal">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-contact-modal" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
             <i class="fas fa-plus"></i> Add Emergency Contact
         </button>
     `;

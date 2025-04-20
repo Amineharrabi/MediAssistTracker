@@ -25,7 +25,7 @@
                     <div class="text-center py-3">
                         <i class="fas fa-calendar-day fa-3x mb-3 text-muted"></i>
                         <p class="mb-0">No upcoming appointments</p>
-                        <a href="/index.php?route=appointments" class="btn btn-sm btn-primary mt-3">
+                        <a href="/index.php?route=appointments" class="btn btn-sm btn-primary mt-3" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             <i class="fas fa-plus-circle me-1"></i> Add Appointment
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <a href="/index.php?route=appointments" class="btn btn-sm btn-outline-primary">
+                                    <a href="/index.php?route=appointments" class="btn btn-sm btn-outline-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
                                 </div>
@@ -59,7 +59,7 @@
                         <?php endforeach; ?>
                     </div>
                     <div class="text-center mt-3">
-                        <a href="/index.php?route=appointments" class="btn btn-sm btn-primary">
+                        <a href="/index.php?route=appointments" class="btn btn-sm btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             View All Appointments
                         </a>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="text-center py-3">
                         <i class="fas fa-prescription-bottle fa-3x mb-3 text-muted"></i>
                         <p class="mb-0">No medications added yet</p>
-                        <a href="/index.php?route=medications" class="btn btn-sm btn-primary mt-3">
+                        <a href="/index.php?route=medications" class="btn btn-sm btn-primary mt-3" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             <i class="fas fa-plus-circle me-1"></i> Add Medication
                         </a>
                     </div>
@@ -111,7 +111,7 @@
                                             ?>
                                         </div>
                                     </div>
-                                    <a href="/index.php?route=medications" class="btn btn-sm btn-outline-primary">
+                                    <a href="/index.php?route=medications" class="btn btn-sm btn-outline-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
                                 </div>
@@ -119,7 +119,7 @@
                         <?php endforeach; ?>
                     </div>
                     <div class="text-center mt-3">
-                        <a href="/index.php?route=medications" class="btn btn-sm btn-primary">
+                        <a href="/index.php?route=medications" class="btn btn-sm btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             View All Medications
                         </a>
                     </div>
@@ -141,7 +141,7 @@
                     <div class="text-center py-3">
                         <i class="fas fa-user-friends fa-3x mb-3 text-muted"></i>
                         <p class="mb-0">No emergency contacts added yet</p>
-                        <a href="/index.php?route=contacts" class="btn btn-sm btn-primary mt-3">
+                        <a href="/index.php?route=contacts" class="btn btn-sm btn-primary mt-3" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             <i class="fas fa-plus-circle me-1"></i> Add Contact
                         </a>
                     </div>
@@ -171,7 +171,7 @@
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                    <a href="/index.php?route=contacts" class="btn btn-sm btn-outline-primary">
+                                    <a href="/index.php?route=contacts" class="btn btn-sm btn-outline-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                         <i class="fas fa-info-circle"></i>
                                     </a>
                                 </div>
@@ -179,7 +179,7 @@
                         <?php endforeach; ?>
                     </div>
                     <div class="text-center mt-3">
-                        <a href="/index.php?route=contacts" class="btn btn-sm btn-primary">
+                        <a href="/index.php?route=contacts" class="btn btn-sm btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             View All Contacts
                         </a>
                     </div>

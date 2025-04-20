@@ -6,7 +6,7 @@
                     <h2 class="card-title">
                         <i class="fas fa-address-book me-2"></i> Emergency Contacts
                     </h2>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContactModal">
+                    <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addContactModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Contact
                     </button>
                 </div>
@@ -24,7 +24,7 @@
                     <i class="fas fa-user-friends fa-4x mb-3 text-muted"></i>
                     <h5 class="text-muted mb-3">No emergency contacts found</h5>
                     <p class="mb-4">You haven't added any emergency contacts yet.</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContactModal">
+                    <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addContactModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Your First Contact
                     </button>
                 </div>
@@ -43,7 +43,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -179,8 +179,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="save-contact">Save</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="save-contact">Save</button>
             </div>
         </div>
     </div>
@@ -201,8 +201,8 @@
                 <p class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i> This action cannot be undone.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirm-delete-contact">Delete</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="confirm-delete-contact">Delete</button>
             </div>
         </div>
     </div>
@@ -285,7 +285,7 @@
                             <i class="fas fa-user-friends fa-4x mb-3 text-muted"></i>
                             <h5 class="text-muted mb-3">No emergency contacts found</h5>
                             <p class="mb-4">You haven't added any emergency contacts yet.</p>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addContactModal">
+                            <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addContactModal">
                                 <i class="fas fa-plus-circle me-1"></i> Add Your First Contact
                             </button>
                         </div>
@@ -313,7 +313,7 @@
                                     ` : ''}
                                 </div>
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
@@ -351,7 +351,7 @@
                                 </div>
                                 <div class="ps-4 d-flex align-items-center">
                                     <p class="mb-0">${escapeHtml(contact.phone)}</p>
-                                    <a href="tel:${phoneFormatted}" class="btn btn-sm btn-outline-primary ms-auto">
+                                    <a href="tel:${phoneFormatted}" class="btn btn-sm btn-outline-primary ms-auto" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                         <i class="fas fa-phone-alt"></i>
                                     </a>
                                 </div>
@@ -365,7 +365,7 @@
                                     </div>
                                     <div class="ps-4 d-flex align-items-center">
                                         <p class="mb-0">${escapeHtml(contact.email)}</p>
-                                        <a href="mailto:${escapeHtml(contact.email)}" class="btn btn-sm btn-outline-primary ms-auto">
+                                        <a href="mailto:${escapeHtml(contact.email)}" class="btn btn-sm btn-outline-primary ms-auto" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                             <i class="fas fa-envelope"></i>
                                         </a>
                                     </div>

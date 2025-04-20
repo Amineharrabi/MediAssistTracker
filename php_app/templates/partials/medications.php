@@ -6,7 +6,7 @@
                     <h2 class="card-title">
                         <i class="fas fa-laptop-medical me-2"></i> Medications
                     </h2>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicationModal">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-target="#addMedicationModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Medication
                     </button>
                 </div>
@@ -24,7 +24,7 @@
                     <i class="fas fa-prescription-bottle fa-4x mb-3 text-muted"></i>
                     <h5 class="text-muted mb-3">No medications found</h5>
                     <p class="mb-4">You haven't added any medications yet.</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicationModal">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicationModal" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                         <i class="fas fa-plus-circle me-1"></i> Add Your First Medication
                     </button>
                 </div>
@@ -153,12 +153,12 @@
                         <div id="time-slots">
                             <div class="input-group mb-2">
                                 <input type="time" class="form-control medication-time" required>
-                                <button type="button" class="btn btn-outline-secondary remove-time" disabled>
+                                <button type="button" class="btn btn-outline-secondary remove-time" disabled style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-sm btn-outline-primary add-time-slot">
+                        <button type="button" class="btn btn-sm btn-outline-primary add-time-slot" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             <i class="fas fa-plus me-1"></i> Add Time
                         </button>
                     </div>
@@ -170,8 +170,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="save-medication">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">Cancel</button>
+                <button type="button" class="btn btn-primary" id="save-medication" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">Save</button>
             </div>
         </div>
     </div>
@@ -192,8 +192,8 @@
                 <p class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i> This action cannot be undone.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirm-delete-medication">Delete</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="confirm-delete-medication">Delete</button>
             </div>
         </div>
     </div>
@@ -253,7 +253,7 @@
         newSlot.className = 'input-group mb-2';
         newSlot.innerHTML = `
             <input type="time" class="form-control medication-time" required>
-            <button type="button" class="btn btn-outline-secondary remove-time">
+            <button type="button" class="btn btn-outline-secondary remove-time" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                 <i class="fas fa-minus"></i>
             </button>
         `;
@@ -292,7 +292,7 @@
         timeSlots.innerHTML = `
             <div class="input-group mb-2">
                 <input type="time" class="form-control medication-time" required>
-                <button type="button" class="btn btn-outline-secondary remove-time" disabled>
+                <button type="button" class="btn btn-outline-secondary remove-time" disabled style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                     <i class="fas fa-minus"></i>
                 </button>
             </div>
@@ -329,7 +329,7 @@
                     newSlot.className = 'input-group mb-2';
                     newSlot.innerHTML = `
                         <input type="time" class="form-control medication-time" value="${time}" required>
-                        <button type="button" class="btn btn-outline-secondary remove-time">
+                        <button type="button" class="btn btn-outline-secondary remove-time" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
                             <i class="fas fa-minus"></i>
                         </button>
                     `;
@@ -522,7 +522,7 @@
                             <i class="fas fa-prescription-bottle fa-4x mb-3 text-muted"></i>
                             <h5 class="text-muted mb-3">No medications found</h5>
                             <p class="mb-4">You haven't added any medications yet.</p>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicationModal">
+                            <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addMedicationModal">
                                 <i class="fas fa-plus-circle me-1"></i> Add Your First Medication
                             </button>
                         </div>
@@ -550,7 +550,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">${escapeHtml(medication.name)}</h5>
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">

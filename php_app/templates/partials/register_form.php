@@ -24,7 +24,7 @@
         <div class="input-group">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
             <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required minlength="8">
-            <button class="btn btn-outline-secondary toggle-password" type="button">
+            <button class="btn btn-outline-secondary toggle-password" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button">
                 <i class="fas fa-eye"></i>
             </button>
         </div>
@@ -37,7 +37,7 @@
         <div class="input-group">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
             <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Confirm your password" required>
-            <button class="btn btn-outline-secondary toggle-password" type="button">
+            <button class="btn btn-outline-secondary toggle-password" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button">
                 <i class="fas fa-eye"></i>
             </button>
         </div>
@@ -45,7 +45,7 @@
     </div>
     
     <div class="d-grid gap-2">
-        <button type="submit" class="btn btn-primary btn-lg">
+        <button type="submit" class="btn btn-primary btn-lg" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
             <i class="fas fa-user-plus me-2"></i> Register
         </button>
     </div>

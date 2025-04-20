@@ -91,7 +91,7 @@ function updateNotificationDropdown(notifications) {
                         <p class="mb-1">${escapeHtml(notification.message)}</p>
                         <small class="text-muted">${timeAgo}</small>
                     </div>
-                    <button class="btn btn-sm btn-link text-primary mark-read" data-id="${notification.id}">
+                    <button class="btn btn-sm btn-link text-primary mark-read"  data-id="${notification.id}">
                         <i class="fas fa-check"></i>
                     </button>
                 </div>

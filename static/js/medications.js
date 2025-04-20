@@ -61,7 +61,7 @@ function displayMedications(medications) {
                 </div>
                 <h5>No medications added yet</h5>
                 <p class="text-muted">Add your first medication to get started</p>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-medication-modal">
+                <button class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#add-medication-modal">
                     <i class="fas fa-plus"></i> Add Medication
                 </button>
             </div>
@@ -99,7 +99,7 @@ function displayMedications(medications) {
                     <div class="d-flex justify-content-between align-items-start">
                         <h5 class="card-title">${medication.name}</h5>
                         <div class="dropdown">
-                            <button class="btn btn-sm btn-link text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-sm btn-link text-dark" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -340,7 +340,7 @@ function addTimeSlot() {
     
     timeSlot.innerHTML = `
         <input type="time" class="form-control" name="time[]">
-        <button type="button" class="btn btn-outline-danger remove-time-btn">
+        <button type="button" class="btn btn-outline-danger remove-time-btn" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;">
             <i class="fas fa-times"></i>
         </button>
     `;
@@ -365,7 +365,7 @@ function resetTimeSlots() {
     container.innerHTML = `
         <div class="time-slot input-group mb-2">
             <input type="time" class="form-control" name="time[]">
-            <button type="button" class="btn btn-outline-secondary" id="add-time-btn">
+            <button type="button" class="btn btn-outline-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="add-time-btn">
                 <i class="fas fa-plus"></i>
             </button>
         </div>

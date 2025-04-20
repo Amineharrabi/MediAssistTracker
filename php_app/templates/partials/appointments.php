@@ -6,7 +6,7 @@
                     <h2 class="card-title">
                         <i class="fa-solid fa-calendar-days me-2"></i> Appointments
                     </h2>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
+                    <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Appointment
                     </button>
                 </div>
@@ -26,11 +26,11 @@
                         <i class="fas fa-calendar me-2 text-primary"></i> Calendar
                     </h5>
                     <div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary me-1" id="prev-month">
+                        <button type="button" class="btn btn-sm btn-outline-secondary me-1" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="prev-month">
                             <i class="fas fa-chevron-left"></i>
                         </button>
                         <span id="current-month-year" class="h5 mb-0"></span>
-                        <button type="button" class="btn btn-sm btn-outline-secondary ms-1" id="next-month">
+                        <button type="button" class="btn btn-sm btn-outline-secondary ms-1" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="next-month">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
@@ -69,7 +69,7 @@
                         <i class="fas fa-calendar-day fa-4x mb-3 text-muted"></i>
                         <h5 class="text-muted mb-3">No appointments found</h5>
                         <p class="mb-4">You haven't added any appointments yet.</p>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
+                        <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
                             <i class="fas fa-plus-circle me-1"></i> Schedule Your First Appointment
                         </button>
                     </div>
@@ -124,7 +124,7 @@
                                             <?php endif; ?>
                                         </div>
                                         <div class="dropdown">
-                                            <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-vertical"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
@@ -196,7 +196,7 @@
                                             <?php endif; ?>
                                         </div>
                                         <div class="dropdown">
-                                            <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-vertical"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
@@ -283,8 +283,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="save-appointment">Save</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="save-appointment">Save</button>
             </div>
         </div>
     </div>
@@ -343,8 +343,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="edit-from-view">Edit</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="edit-from-view">Edit</button>
             </div>
         </div>
     </div>
@@ -365,8 +365,8 @@
                 <p class="text-danger"><i class="fas fa-exclamation-triangle me-1"></i> This action cannot be undone.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirm-delete-appointment">Delete</button>
+                <button type="button" class="btn btn-secondary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" id="confirm-delete-appointment">Delete</button>
             </div>
         </div>
     </div>
@@ -720,7 +720,7 @@
                     <i class="fas fa-calendar-day fa-4x mb-3 text-muted"></i>
                     <h5 class="text-muted mb-3">No appointments found</h5>
                     <p class="mb-4">You haven't added any appointments yet.</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
+                    <button type="button" class="btn btn-primary" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" data-bs-toggle="modal" data-bs-target="#addAppointmentModal">
                         <i class="fas fa-plus-circle me-1"></i> Schedule Your First Appointment
                     </button>
                 </div>
@@ -773,7 +773,7 @@
                                 ` : ''}
                             </div>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -845,7 +845,7 @@
                                 ` : ''}
                             </div>
                             <div class="dropdown">
-                                <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-sm btn-link text-muted" style="background-color: #1a9b6c; border-color: #1a9b6c; color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
