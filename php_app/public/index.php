@@ -1,6 +1,5 @@
 <?php
 require_once dirname(__DIR__) . '/config/config.php';
-echo getenv('DB_HOST');
 require_once INCLUDES_PATH . '/models/User.php';
 require_once INCLUDES_PATH . '/models/Medication.php';
 require_once INCLUDES_PATH . '/models/Appointment.php';
