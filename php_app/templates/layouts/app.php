@@ -1,132 +1,144 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="<?php echo $theme; ?>">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title ?? 'MediAssist'; ?></title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    
+
     <!-- Theme-specific CSS -->
     <style>
         :root {
-            --primary-color: #4e73df;
-            --secondary-color: #858796;
+            --primary-color: #000000;
+            --secondary-color: #555555;
             --success-color: #1cc88a;
             --info-color: #36b9cc;
             --warning-color: #f6c23e;
             --danger-color: #e74a3b;
         }
-        
+
         [data-theme="light"] {
             --bg-color: #f8f9fc;
             --bg-card: rgba(255, 255, 255, 0.8);
             --text-color: #5a5c69;
-            --heading-color: #4e73df;
+            --heading-color: #000000;
             --border-color: #e3e6f0;
             --shadow-color: rgba(0, 0, 0, 0.1);
         }
-        
+
         [data-theme="dark"] {
             --bg-color: #1e2130;
             --bg-card: rgba(40, 44, 52, 0.8);
             --text-color: #f8f9fc;
-            --heading-color: #4e73df;
+            --heading-color: #ffffff;
             --border-color: #4b5064;
             --shadow-color: rgba(0, 0, 0, 0.3);
         }
-        
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        
-        .card, .modal-content {
+
+        .card,
+        .modal-content {
             background-color: var(--bg-card);
             color: var(--text-color);
             border-color: var(--border-color);
             box-shadow: 0 0.15rem 1.75rem 0 var(--shadow-color);
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        
+
         .table {
             color: var(--text-color);
         }
-        
-        .form-control, .form-select {
+
+        .form-control,
+        .form-select {
             background-color: var(--bg-color);
             color: var(--text-color);
             border-color: var(--border-color);
         }
-        
-        .form-control:focus, .form-select:focus {
+
+        .form-control:focus,
+        .form-select:focus {
             background-color: var(--bg-color);
             color: var(--text-color);
         }
-        
-        .navbar, .footer {
+
+        .navbar,
+        .footer {
             background-color: var(--bg-card);
             border-color: var(--border-color);
         }
-        
-        .navbar-brand, .nav-link {
+
+        .navbar-brand,
+        .nav-link {
             color: var(--text-color) !important;
         }
-        
+
         .nav-link.active {
             color: var(--heading-color) !important;
             font-weight: bold;
         }
-        
+
         .dropdown-menu {
             background-color: var(--bg-card);
             border-color: var(--border-color);
         }
-        
+
         .dropdown-item {
             color: var(--text-color);
         }
-        
+
         .dropdown-item:hover {
             background-color: var(--bg-color);
         }
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             color: var(--heading-color);
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top mb-4 backdrop-blur">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <i class="fas fa-pills me-2 text-primary"></i>
+                <i class="fas fa-laptop-medical me-2 text-primary"></i>
                 <span>MediAssist</span>
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link <?php echo $route === 'home' ? 'active' : ''; ?>" href="/">
-                            <i class="fas fa-home me-1"></i> Dashboard
+                            <i class="fas fa-clinic-medical me-1"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo $route === 'medications' ? 'active' : ''; ?>" href="/index.php?route=medications">
-                            <i class="fas fa-pills me-1"></i> Medications
+                            <i class="fas fa-laptop-medical me-2"></i> Medications
                         </a>
                     </li>
                     <li class="nav-item">
@@ -145,7 +157,7 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <ul class="navbar-nav">
                     <!-- Notifications Dropdown -->
                     <li class="nav-item dropdown me-2">
@@ -164,7 +176,7 @@
                             <a class="dropdown-item text-center" href="#" id="mark-all-read">Mark all as read</a>
                         </div>
                     </li>
-                    
+
                     <!-- Theme Toggle -->
                     <li class="nav-item me-2">
                         <form method="POST" id="theme-form">
@@ -175,7 +187,7 @@
                             </button>
                         </form>
                     </li>
-                    
+
                     <!-- User Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -185,7 +197,9 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-1"></i> Profile</a></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-1"></i> Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="/index.php?route=logout"><i class="fas fa-sign-out-alt me-1"></i> Logout</a></li>
                         </ul>
                     </li>
@@ -193,7 +207,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Content -->
     <div class="container mb-4">
         <!-- Flash Messages -->
@@ -207,7 +221,7 @@
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-        
+
         <!-- Page Content -->
         <?php if (isset($page_content) && file_exists(TEMPLATE_PATH . '/' . $page_content)): ?>
             <?php include TEMPLATE_PATH . '/' . $page_content; ?>
@@ -217,7 +231,7 @@
             </div>
         <?php endif; ?>
     </div>
-    
+
     <!-- Footer -->
     <footer class="footer mt-auto py-3 text-center">
         <div class="container">
@@ -226,17 +240,17 @@
             </span>
         </div>
     </footer>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/notifications.js"></script>
-    
+
     <!-- Page-specific JS -->
     <?php if ($route === 'medications'): ?>
         <script src="/assets/js/medications.js"></script>
@@ -248,4 +262,5 @@
         <script src="/assets/js/contacts.js"></script>
     <?php endif; ?>
 </body>
+
 </html>

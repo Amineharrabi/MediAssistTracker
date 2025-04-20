@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="card-title">
-                        <i class="fas fa-pills me-2"></i> Medications
+                        <i class="fas fa-laptop-medical me-2"></i> Medications
                     </h2>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicationModal">
                         <i class="fas fa-plus-circle me-1"></i> Add Medication
@@ -77,9 +77,9 @@
                                 <h6 class="mb-0">Times:</h6>
                             </div>
                             <div class="ps-4">
-                                <?php 
-                                    $times = json_decode_safe($medication['time']);
-                                    foreach ($times as $time): 
+                                <?php
+                                $times = json_decode_safe($medication['time']);
+                                foreach ($times as $time):
                                 ?>
                                     <span class="badge bg-light text-dark me-1 mb-1 py-2 px-3">
                                         <i class="far fa-clock me-1"></i> <?php echo format_time($time . ':00'); ?>
@@ -124,17 +124,17 @@
             <div class="modal-body">
                 <form id="medication-form">
                     <input type="hidden" id="medication-id">
-                    
+
                     <div class="mb-3">
                         <label for="medication-name" class="form-label">Medication Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="medication-name" required>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="medication-dosage" class="form-label">Dosage <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="medication-dosage" placeholder="e.g., 10mg, 1 tablet" required>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="medication-frequency" class="form-label">Frequency <span class="text-danger">*</span></label>
                         <select class="form-select" id="medication-frequency" required>
@@ -147,7 +147,7 @@
                             <option value="As Needed">As Needed</option>
                         </select>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label class="form-label">Time(s) <span class="text-danger">*</span></label>
                         <div id="time-slots">
@@ -162,7 +162,7 @@
                             <i class="fas fa-plus me-1"></i> Add Time
                         </button>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="medication-notes" class="form-label">Notes</label>
                         <textarea class="form-control" id="medication-notes" rows="3" placeholder="Additional notes or instructions"></textarea>
@@ -203,47 +203,47 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Load medications on page load
         loadMedications();
-        
+
         // Add Time Slot Button
         document.querySelector('.add-time-slot').addEventListener('click', function() {
             addTimeSlot();
         });
-        
+
         // Save Medication Button
         document.getElementById('save-medication').addEventListener('click', function() {
             handleMedicationFormSubmit();
         });
-        
+
         // Setup event delegation for edit and delete buttons
         document.getElementById('medications-container').addEventListener('click', function(event) {
-            if (event.target.classList.contains('edit-medication') || 
+            if (event.target.classList.contains('edit-medication') ||
                 event.target.closest('.edit-medication')) {
-                
-                const button = event.target.classList.contains('edit-medication') ? 
-                               event.target : event.target.closest('.edit-medication');
-                
+
+                const button = event.target.classList.contains('edit-medication') ?
+                    event.target : event.target.closest('.edit-medication');
+
                 const medicationId = button.getAttribute('data-id');
                 openEditMedicationModal(medicationId);
             }
-            
-            if (event.target.classList.contains('delete-medication') || 
+
+            if (event.target.classList.contains('delete-medication') ||
                 event.target.closest('.delete-medication')) {
-                
-                const button = event.target.classList.contains('delete-medication') ? 
-                               event.target : event.target.closest('.delete-medication');
-                
+
+                const button = event.target.classList.contains('delete-medication') ?
+                    event.target : event.target.closest('.delete-medication');
+
                 const medicationId = button.getAttribute('data-id');
                 confirmDeleteMedication(medicationId);
             }
         });
-        
+
         // Confirm Delete Medication Button
         document.getElementById('confirm-delete-medication').addEventListener('click', function() {
             const medicationId = this.getAttribute('data-id');
             deleteMedication(medicationId);
         });
     });
-    
+
     /**
      * Adds a new time slot input to the form
      */
@@ -257,20 +257,20 @@
                 <i class="fas fa-minus"></i>
             </button>
         `;
-        
+
         timeSlots.appendChild(newSlot);
-        
+
         // Enable all remove buttons if we have more than one time slot
         if (timeSlots.querySelectorAll('.input-group').length > 1) {
             timeSlots.querySelectorAll('.remove-time').forEach(button => {
                 button.disabled = false;
             });
         }
-        
+
         // Add event listener to the new remove button
         newSlot.querySelector('.remove-time').addEventListener('click', function() {
             this.closest('.input-group').remove();
-            
+
             // Disable the last remove button if only one time slot remains
             const slots = timeSlots.querySelectorAll('.input-group');
             if (slots.length === 1) {
@@ -278,7 +278,7 @@
             }
         });
     }
-    
+
     /**
      * Resets the medication form
      */
@@ -286,7 +286,7 @@
         const form = document.getElementById('medication-form');
         form.reset();
         document.getElementById('medication-id').value = '';
-        
+
         // Reset time slots to a single empty input
         const timeSlots = document.getElementById('time-slots');
         timeSlots.innerHTML = `
@@ -297,18 +297,18 @@
                 </button>
             </div>
         `;
-        
+
         // Update modal title
         document.getElementById('addMedicationModalLabel').innerHTML = '<i class="fas fa-plus-circle me-2"></i> Add Medication';
     }
-    
+
     /**
      * Opens the edit medication modal with pre-filled data
      * @param {string} medicationId - The ID of the medication to edit
      */
     function openEditMedicationModal(medicationId) {
         resetMedicationForm();
-        
+
         // Fetch medication data
         fetch(`/api.php?endpoint=medication&id=${medicationId}`)
             .then(response => response.json())
@@ -318,12 +318,12 @@
                 document.getElementById('medication-dosage').value = medication.dosage;
                 document.getElementById('medication-frequency').value = medication.frequency;
                 document.getElementById('medication-notes').value = medication.notes || '';
-                
+
                 // Set time slots
                 const times = JSON.parse(medication.time);
                 const timeSlots = document.getElementById('time-slots');
                 timeSlots.innerHTML = ''; // Clear existing slots
-                
+
                 times.forEach((time, index) => {
                     const newSlot = document.createElement('div');
                     newSlot.className = 'input-group mb-2';
@@ -333,13 +333,13 @@
                             <i class="fas fa-minus"></i>
                         </button>
                     `;
-                    
+
                     timeSlots.appendChild(newSlot);
-                    
+
                     // Add event listener to the remove button
                     newSlot.querySelector('.remove-time').addEventListener('click', function() {
                         this.closest('.input-group').remove();
-                        
+
                         // Disable the last remove button if only one time slot remains
                         const slots = timeSlots.querySelectorAll('.input-group');
                         if (slots.length === 1) {
@@ -347,16 +347,16 @@
                         }
                     });
                 });
-                
+
                 // Disable remove buttons if only one time slot
                 const slots = timeSlots.querySelectorAll('.input-group');
                 slots.forEach(slot => {
                     slot.querySelector('.remove-time').disabled = slots.length === 1;
                 });
-                
+
                 // Update modal title
                 document.getElementById('addMedicationModalLabel').innerHTML = '<i class="fas fa-edit me-2"></i> Edit Medication';
-                
+
                 // Show the modal
                 const modal = new bootstrap.Modal(document.getElementById('addMedicationModal'));
                 modal.show();
@@ -366,36 +366,36 @@
                 showAlert('Failed to fetch medication details.', 'danger');
             });
     }
-    
+
     /**
      * Handles the medication form submission
      */
     function handleMedicationFormSubmit() {
         const form = document.getElementById('medication-form');
-        
+
         // Check form validity
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
-        
+
         // Get form values
         const medicationId = document.getElementById('medication-id').value;
         const name = document.getElementById('medication-name').value;
         const dosage = document.getElementById('medication-dosage').value;
         const frequency = document.getElementById('medication-frequency').value;
         const notes = document.getElementById('medication-notes').value;
-        
+
         // Get all time inputs
         const timeInputs = document.querySelectorAll('.medication-time');
         const times = Array.from(timeInputs).map(input => input.value);
-        
+
         // Check if all times are filled
         if (times.some(time => !time)) {
             showAlert('Please fill in all time fields.', 'danger');
             return;
         }
-        
+
         // Prepare data
         const data = {
             name,
@@ -404,44 +404,44 @@
             times,
             notes
         };
-        
+
         // Determine if this is an add or update operation
         const isUpdate = !!medicationId;
         const method = isUpdate ? 'PUT' : 'POST';
         const url = isUpdate ? `/api.php?endpoint=medication&id=${medicationId}` : '/api.php?endpoint=medications';
-        
+
         // Send request
         fetch(url, {
-            method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                // Close modal
-                bootstrap.Modal.getInstance(document.getElementById('addMedicationModal')).hide();
-                
-                // Show success message
-                showAlert(
-                    isUpdate ? 'Medication updated successfully!' : 'Medication added successfully!', 
-                    'success'
-                );
-                
-                // Reload medications
-                loadMedications();
-            } else {
-                showAlert(result.error || 'An error occurred.', 'danger');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showAlert('An error occurred. Please try again.', 'danger');
-        });
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Close modal
+                    bootstrap.Modal.getInstance(document.getElementById('addMedicationModal')).hide();
+
+                    // Show success message
+                    showAlert(
+                        isUpdate ? 'Medication updated successfully!' : 'Medication added successfully!',
+                        'success'
+                    );
+
+                    // Reload medications
+                    loadMedications();
+                } else {
+                    showAlert(result.error || 'An error occurred.', 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('An error occurred. Please try again.', 'danger');
+            });
     }
-    
+
     /**
      * Shows a confirmation dialog before deleting a medication
      * @param {string} medicationId - The ID of the medication to delete
@@ -453,7 +453,7 @@
             .then(medication => {
                 document.getElementById('delete-medication-name').textContent = medication.name;
                 document.getElementById('confirm-delete-medication').setAttribute('data-id', medicationId);
-                
+
                 const modal = new bootstrap.Modal(document.getElementById('deleteMedicationModal'));
                 modal.show();
             })
@@ -462,36 +462,36 @@
                 showAlert('Failed to fetch medication details.', 'danger');
             });
     }
-    
+
     /**
      * Deletes a medication
      * @param {string} medicationId - The ID of the medication to delete
      */
     function deleteMedication(medicationId) {
         fetch(`/api.php?endpoint=medication&id=${medicationId}`, {
-            method: 'DELETE'
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                // Close modal
-                bootstrap.Modal.getInstance(document.getElementById('deleteMedicationModal')).hide();
-                
-                // Show success message
-                showAlert('Medication deleted successfully!', 'success');
-                
-                // Reload medications
-                loadMedications();
-            } else {
-                showAlert(result.error || 'An error occurred.', 'danger');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showAlert('An error occurred. Please try again.', 'danger');
-        });
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Close modal
+                    bootstrap.Modal.getInstance(document.getElementById('deleteMedicationModal')).hide();
+
+                    // Show success message
+                    showAlert('Medication deleted successfully!', 'success');
+
+                    // Reload medications
+                    loadMedications();
+                } else {
+                    showAlert(result.error || 'An error occurred.', 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('An error occurred. Please try again.', 'danger');
+            });
     }
-    
+
     /**
      * Loads medications from the server
      */
@@ -506,14 +506,14 @@
                 showAlert('Failed to load medications.', 'danger');
             });
     }
-    
+
     /**
      * Displays medications on the page
      * @param {Array} medications - Array of medication objects
      */
     function displayMedications(medications) {
         const container = document.getElementById('medications-container');
-        
+
         if (!medications || medications.length === 0) {
             container.innerHTML = `
                 <div class="col-12">
@@ -531,9 +531,9 @@
             `;
             return;
         }
-        
+
         let html = '';
-        
+
         medications.forEach(medication => {
             const times = JSON.parse(medication.time);
             const timesHtml = times.map(time => {
@@ -542,7 +542,7 @@
                             <i class="far fa-clock me-1"></i> ${formattedTime}
                         </span>`;
             }).join('');
-            
+
             html += `
                 <div class="col-lg-4 col-md-6 mb-4 medication-card" data-id="${medication.id}">
                     <div class="card h-100 shadow-sm border-0">
@@ -613,10 +613,10 @@
                 </div>
             `;
         });
-        
+
         container.innerHTML = html;
     }
-    
+
     /**
      * Formats a date for display
      * @param {string} dateStr - Date string
@@ -624,9 +624,13 @@
      */
     function formatDate(dateStr) {
         const date = new Date(dateStr);
-        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
     }
-    
+
     /**
      * Formats a time for display
      * @param {string} timeStr - Time string (HH:MM:SS)
@@ -634,9 +638,13 @@
      */
     function formatTime(timeStr) {
         const date = new Date(`2000-01-01T${timeStr}`);
-        return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        return date.toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
     }
-    
+
     /**
      * Escapes HTML special characters
      * @param {string} text - Text to escape
@@ -651,7 +659,7 @@
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
-    
+
     /**
      * Shows an alert message
      * @param {string} message - The message to show
@@ -659,21 +667,21 @@
      */
     function showAlert(message, type = 'info') {
         const alertContainer = document.getElementById('flash-messages');
-        
+
         if (!alertContainer) {
             console.error('Alert container not found');
             return;
         }
-        
+
         const alert = document.createElement('div');
         alert.className = `alert alert-${type} alert-dismissible fade show`;
         alert.innerHTML = `
             ${message}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         `;
-        
+
         alertContainer.appendChild(alert);
-        
+
         // Auto-dismiss after 5 seconds
         setTimeout(() => {
             alert.classList.remove('show');

@@ -1,8 +1,5 @@
 <?php
 
-/**
- * Medication Model (Supabase Version)
- */
 
 class Medication
 {
@@ -53,12 +50,7 @@ class Medication
         return json_decode($response, true);
     }
 
-    /**
-     * Get all medications for a user
-     *
-     * @param int $user_id User ID
-     * @return array|bool Array of medications if successful, false otherwise
-     */
+   
     public function getAll($user_id)
     {
         $query = "?user_id=eq." . urlencode($user_id);
@@ -67,13 +59,7 @@ class Medication
         return $result ?: false;
     }
 
-    /**
-     * Get a medication by ID
-     *
-     * @param int $id Medication ID
-     * @param int $user_id User ID (for security)
-     * @return array|bool Medication data if found, false otherwise
-     */
+    
     public function getById($id, $user_id)
     {
         $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
@@ -82,17 +68,7 @@ class Medication
         return $result[0] ?? false;
     }
 
-    /**
-     * Create a new medication
-     *
-     * @param string $name Medication name
-     * @param string $dosage Dosage information
-     * @param string $frequency Frequency information
-     * @param array $times Times to take medication
-     * @param string $notes Additional notes
-     * @param int $user_id User ID
-     * @return int|bool Medication ID if successful, false otherwise
-     */
+   
     public function create($name, $dosage, $frequency, $times, $notes, $user_id)
     {
         $time_json = json_encode($times);
@@ -116,18 +92,7 @@ class Medication
         return false;
     }
 
-    /**
-     * Update a medication
-     *
-     * @param int $id Medication ID
-     * @param string $name Medication name
-     * @param string $dosage Dosage information
-     * @param string $frequency Frequency information
-     * @param array $times Times to take medication
-     * @param string $notes Additional notes
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
+    
     public function update($id, $name, $dosage, $frequency, $times, $notes, $user_id)
     {
         $time_json = json_encode($times);
@@ -146,13 +111,7 @@ class Medication
         return $result ? true : false;
     }
 
-    /**
-     * Delete a medication
-     *
-     * @param int $id Medication ID
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
+   
     public function delete($id, $user_id)
     {
         $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);

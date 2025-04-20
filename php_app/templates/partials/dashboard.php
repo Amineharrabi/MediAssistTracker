@@ -67,13 +67,13 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Medications -->
     <div class="col-lg-6 mb-4">
         <div class="card shadow-sm h-100">
             <div class="card-header bg-transparent">
                 <h5 class="mb-0">
-                    <i class="fas fa-pills me-2 text-primary"></i> Your Medications
+                    <i class="fas fa-laptop-medical me-2 text-primary"></i> Your Medications
                 </h5>
             </div>
             <div class="card-body">
@@ -87,11 +87,11 @@
                     </div>
                 <?php else: ?>
                     <div class="list-group list-group-flush">
-                        <?php 
-                            // Display only the first 5 medications
-                            $count = 0;
-                            foreach ($medications as $medication): 
-                                if ($count++ >= 5) break;
+                        <?php
+                        // Display only the first 5 medications
+                        $count = 0;
+                        foreach ($medications as $medication):
+                            if ($count++ >= 5) break;
                         ?>
                             <div class="list-group-item border-0 px-0">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -102,12 +102,12 @@
                                             <i class="fas fa-clock ms-2 me-1"></i> <?php echo htmlspecialchars($medication['frequency']); ?>
                                         </div>
                                         <div class="small text-muted">
-                                            <i class="fas fa-hourglass-half me-1"></i> Times: 
-                                            <?php 
-                                                $times = json_decode_safe($medication['time']);
-                                                echo implode(', ', array_map(function($time) {
-                                                    return format_time($time . ':00');
-                                                }, $times));
+                                            <i class="fas fa-hourglass-half me-1"></i> Times:
+                                            <?php
+                                            $times = json_decode_safe($medication['time']);
+                                            echo implode(', ', array_map(function ($time) {
+                                                return format_time($time . ':00');
+                                            }, $times));
                                             ?>
                                         </div>
                                     </div>
@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Emergency Contacts -->
     <div class="col-lg-6 mb-4">
         <div class="card shadow-sm h-100">
@@ -147,11 +147,11 @@
                     </div>
                 <?php else: ?>
                     <div class="list-group list-group-flush">
-                        <?php 
-                            // Display only the first 3 contacts
-                            $count = 0;
-                            foreach ($contacts as $contact): 
-                                if ($count++ >= 3) break;
+                        <?php
+                        // Display only the first 3 contacts
+                        $count = 0;
+                        foreach ($contacts as $contact):
+                            if ($count++ >= 3) break;
                         ?>
                             <div class="list-group-item border-0 px-0">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -187,7 +187,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Quick Links -->
     <div class="col-lg-6 mb-4">
         <div class="card shadow-sm h-100">

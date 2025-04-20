@@ -15,8 +15,8 @@ foreach ($lines as $line) {
 
     list($key, $value) = explode('=', $line, 2);
     $key = trim($key);
-    $value = trim($value, " \t\n\r\0\x0B\"'"); // trim quotes and whitespace
+    $value = trim($value, " \t\n\r\0\x0B\"'"); 
 
     $_ENV[$key] = $value;
-    putenv("$key=$value"); // Makes getenv() work
+    putenv("$key=$value"); 
 }

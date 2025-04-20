@@ -1,35 +1,36 @@
-/* MediAssist Main Stylesheet */
+/* MediAssist Main Stylesheet - Minimalist Edition */
 
 :root {
-    --primary-color: #4e73df;
-    --secondary-color: #858796;
-    --success-color: #1cc88a;
-    --info-color: #36b9cc;
-    --warning-color: #f6c23e;
-    --danger-color: #e74a3b;
+    --primary-color: #000000;
+    --secondary-color: #555555;
+    --success-color: #1a9b6c;  /* Medical green */
+    --info-color: #3e3e3e;
+    --warning-color: #a8a8a8;
+    --danger-color: #990000;
 }
 
 [data-theme="light"] {
-    --bg-color: #f8f9fc;
-    --bg-gradient: linear-gradient(135deg, #f8f9fc 0%, #e5e9f2 100%);
-    --bg-card: rgba(255, 255, 255, 0.8);
-    --text-color: #5a5c69;
-    --heading-color: #4e73df;
-    --border-color: #e3e6f0;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --bg-color: #ffffff;
+    --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --text-color: #333333;
+    --heading-color: #000000;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --highlight-color: #1a9b6c;  /* Medical green */
 }
 
 [data-theme="dark"] {
-    --bg-color: #1e2130;
-    --bg-gradient: linear-gradient(135deg, #1e2130 0%, #2c3144 100%);
-    --bg-card: rgba(40, 44, 52, 0.8);
-    --text-color: #f8f9fc;
-    --heading-color: #4e73df;
-    --border-color: #4b5064;
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    --bg-color: #121212;
+    --bg-gradient: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+    --bg-card: rgba(30, 30, 30, 0.9);
+    --text-color: #f0f0f0;
+    --heading-color: #ffffff;
+    --border-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --highlight-color: #1a9b6c;  /* Medical green */
 }
 
-/* Global Styles */
 body {
     font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--bg-color);
@@ -43,13 +44,11 @@ body {
     position: relative;
 }
 
-/* Elements with Backdrop Blur */
 .backdrop-blur {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Cards & Containers */
 .card {
     background-color: var(--bg-card);
     color: var(--text-color);
@@ -57,7 +56,7 @@ body {
     box-shadow: 0 0.15rem 1.75rem 0 var(--shadow-color);
     transition: all 0.3s ease;
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: 0.35rem;
 }
 
 .card:hover {
@@ -75,7 +74,6 @@ body {
     border-top-color: var(--border-color);
 }
 
-/* Buttons */
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -83,10 +81,20 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #4062c7;
-    border-color: #4062c7;
+    background-color: #333333;
+    border-color: #333333;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(78, 115, 223, 0.25);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: #158a5f;
+    border-color: #158a5f;
 }
 
 .btn-outline-primary {
@@ -97,9 +105,9 @@ body {
 .btn-outline-primary:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    color: white;
 }
 
-/* Navbar */
 .navbar {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
@@ -124,11 +132,10 @@ body {
     left: 10%;
     width: 80%;
     height: 2px;
-    background-color: var(--primary-color);
+    background-color: var(--highlight-color);
     border-radius: 2px;
 }
 
-/* Forms */
 .form-control, .form-select {
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -139,8 +146,8 @@ body {
 .form-control:focus, .form-select:focus {
     background-color: var(--bg-color);
     color: var(--text-color);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 0.25rem rgba(26, 155, 108, 0.25);
 }
 
 .input-group-text {
@@ -162,11 +169,10 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: rgba(78, 115, 223, 0.1);
-    color: var(--primary-color);
+    background-color: rgba(26, 155, 108, 0.1);
+    color: var(--highlight-color);
 }
 
-/* Tables */
 .table {
     color: var(--text-color);
 }
@@ -176,7 +182,6 @@ body {
     border-bottom-width: 1px;
 }
 
-/* Modals */
 .modal-content {
     background-color: var(--bg-card);
     color: var(--text-color);
@@ -188,12 +193,18 @@ body {
     border-color: var(--border-color);
 }
 
-/* Badges */
 .badge {
     font-weight: 600;
 }
 
-/* Lists */
+.badge-primary {
+    background-color: var(--primary-color);
+}
+
+.badge-success {
+    background-color: var(--success-color);
+}
+
 .list-group-item {
     background-color: transparent;
     color: var(--text-color);
@@ -202,22 +213,24 @@ body {
 }
 
 .list-group-item:hover {
-    background-color: rgba(78, 115, 223, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* Alerts */
+.list-group-item.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
 .alert {
-    border-radius: 0.5rem;
+    border-radius: 0.35rem;
 }
 
-/* Footer */
 .footer {
     background-color: var(--bg-card);
     border-top: 1px solid var(--border-color);
     margin-top: auto;
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
     color: var(--heading-color);
     font-weight: 700;
@@ -227,7 +240,10 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--primary-color) !important;
 }
 
-/* Custom Animation */
+.text-success {
+    color: var(--success-color) !important;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -237,7 +253,13 @@ h1, h2, h3, h4, h5, h6 {
     animation: fadeIn 0.5s ease forwards;
 }
 
-/* Responsive Adjustments */
+.accent-line {
+    height: 3px;
+    width: 50px;
+    background-color: var(--highlight-color);
+    margin: 0.5rem 0 1.5rem;
+}
+
 @media (max-width: 768px) {
     .card {
         margin-bottom: 1rem;
@@ -248,15 +270,17 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Background Pattern */
 .bg-pattern {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.05;
+    opacity: 0.03;
     z-index: -1;
-    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="15" height="15" rx="3" fill="%234e73df" /><rect x="45" y="45" width="15" height="15" rx="3" fill="%234e73df" /></svg>');
+    background-image: 
+        linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+    background-size: 20px 20px;
     pointer-events: none;
 }

@@ -11,7 +11,6 @@ require_once INCLUDES_PATH . '/models/Notification.php';
 require_once __DIR__ . '/../config/load_env.php';
 
 
-// Initialize models
 $userModel = new User($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 $medicationModel = new Medication($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 $appointmentModel = new Appointment($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
@@ -19,25 +18,20 @@ $prescriptionModel = new Prescription($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY
 $contactModel = new EmergencyContact($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 $notificationModel = new Notification($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 
-// Handle page routing
 $route = $_GET['route'] ?? 'home';
 
 
-// Check for theme toggle
 if (isset($_POST['toggle_theme']) && is_logged_in()) {
     $new_theme = $_SESSION['user_theme'] === 'light' ? 'dark' : 'light';
     $userModel->setTheme(get_user_id(), $new_theme);
 
-    // Redirect to same page to prevent form resubmission
     $current_url = $_SERVER['REQUEST_URI'];
     redirect($current_url);
 }
 
-// Define variables for templates
 $page_title = 'MediAssist';
 $flash_messages = get_flash_messages();
 
-// Handle routing
 switch ($route) {
     case 'register':
         if (is_logged_in()) {
@@ -142,7 +136,6 @@ switch ($route) {
         require_login();
         $page_title = 'Medications - MediAssist';
 
-        // Get all medications for user
         $medications = $medicationModel->getAll(get_user_id());
 
         render('layouts/app.php', [
@@ -158,7 +151,6 @@ switch ($route) {
         require_login();
         $page_title = 'Appointments - MediAssist';
 
-        // Get all appointments for user
         $appointments = $appointmentModel->getAll(get_user_id());
 
         render('layouts/app.php', [
@@ -174,7 +166,6 @@ switch ($route) {
         require_login();
         $page_title = 'Prescriptions - MediAssist';
 
-        // Get all prescriptions for user
         $prescriptions = $prescriptionModel->getAll(get_user_id());
 
         render('layouts/app.php', [
@@ -190,7 +181,6 @@ switch ($route) {
         require_login();
         $page_title = 'Emergency Contacts - MediAssist';
 
-        // Get all emergency contacts for user
         $contacts = $contactModel->getAll(get_user_id());
 
         render('layouts/app.php', [
@@ -210,13 +200,10 @@ switch ($route) {
 
         $page_title = 'Dashboard - MediAssist';
 
-        // Get upcoming appointments
         $upcoming_appointments = $appointmentModel->getUpcoming(get_user_id(), 5);
 
-        // Get medications
         $medications = $medicationModel->getAll(get_user_id());
 
-        // Get emergency contacts
         $contacts = $contactModel->getAll(get_user_id());
 
         render('layouts/app.php', [

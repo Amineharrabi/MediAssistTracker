@@ -1,10 +1,6 @@
 <?php
 
-/**
- * API Endpoints for AJAX Requests
- */
 
-// Load configuration
 require_once dirname(__DIR__) . '/config/config.php';
 
 // Load model classes
@@ -23,32 +19,24 @@ $prescriptionModel = new Prescription($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY
 $contactModel = new EmergencyContact($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 $notificationModel = new Notification($_ENV['SUPABASE_URL'], $_ENV['SUPABASE_KEY']);
 
-// Set content type to JSON
 header('Content-Type: application/json');
 
-// Check login status
 if (!is_logged_in()) {
     http_response_code(401);
     echo json_encode(['error' => 'Unauthorized']);
     exit;
 }
 
-// Get user ID
 $user_id = get_user_id();
 
-// Get the API endpoint
 $endpoint = $_GET['endpoint'] ?? '';
 
-// Process API request
 switch ($endpoint) {
-    // Medications API
     case 'medications':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get all medications
             $medications = $medicationModel->getAll($user_id);
             echo json_encode($medications ?: []);
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Create new medication
             $data = json_decode(file_get_contents('php://input'), true);
 
             if (!$data) {
@@ -98,7 +86,6 @@ switch ($endpoint) {
         $medication_id = (int)$_GET['id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get medication by ID
             $medication = $medicationModel->getById($medication_id, $user_id);
 
             if ($medication) {
@@ -108,7 +95,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Medication not found']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-            // Update medication
             $data = json_decode(file_get_contents('php://input'), true);
 
             if (!$data) {
@@ -139,7 +125,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Failed to update medication']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            // Delete medication
             $result = $medicationModel->delete($medication_id, $user_id);
 
             if ($result) {
@@ -154,14 +139,11 @@ switch ($endpoint) {
         }
         break;
 
-    // Appointments API
     case 'appointments':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get all appointments
             $appointments = $appointmentModel->getAll($user_id);
             echo json_encode($appointments ?: []);
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Create new appointment
             $data = json_decode(file_get_contents('php://input'), true);
 
             if (!$data) {
@@ -212,7 +194,6 @@ switch ($endpoint) {
         $appointment_id = (int)$_GET['id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get appointment by ID
             $appointment = $appointmentModel->getById($appointment_id, $user_id);
 
             if ($appointment) {
@@ -222,7 +203,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Appointment not found']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-            // Update appointment
             $data = json_decode(file_get_contents('php://input'), true);
 
             if (!$data) {
@@ -254,7 +234,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Failed to update appointment']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            // Delete appointment
             $result = $appointmentModel->delete($appointment_id, $user_id);
 
             if ($result) {
@@ -269,15 +248,11 @@ switch ($endpoint) {
         }
         break;
 
-    // Prescriptions API
     case 'prescriptions':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get all prescriptions
             $prescriptions = $prescriptionModel->getAll($user_id);
             echo json_encode($prescriptions ?: []);
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Create new prescription
-            // For file uploads, we need to use $_POST and $_FILES
 
             $title = sanitize($_POST['title'] ?? '');
             $doctor = sanitize($_POST['doctor'] ?? '');
@@ -290,7 +265,6 @@ switch ($endpoint) {
                 exit;
             }
 
-            // Handle image upload
             $image_data = null;
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $image_data = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
@@ -321,7 +295,6 @@ switch ($endpoint) {
         $prescription_id = (int)$_GET['id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get prescription by ID
             $prescription = $prescriptionModel->getById($prescription_id, $user_id);
 
             if ($prescription) {
@@ -331,7 +304,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Prescription not found']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Update prescription (using POST for file uploads)
 
             $title = sanitize($_POST['title'] ?? '');
             $doctor = sanitize($_POST['doctor'] ?? '');
@@ -344,7 +316,6 @@ switch ($endpoint) {
                 exit;
             }
 
-            // Handle image upload
             $image_data = null;
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $image_data = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
@@ -360,7 +331,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Failed to update prescription']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            // Delete prescription
             $result = $prescriptionModel->delete($prescription_id, $user_id);
 
             if ($result) {
@@ -375,14 +345,11 @@ switch ($endpoint) {
         }
         break;
 
-    // Emergency Contacts API
     case 'contacts':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get all emergency contacts
             $contacts = $contactModel->getAll($user_id);
             echo json_encode($contacts ?: []);
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Create new emergency contact
             $data = json_decode(file_get_contents('php://input'), true);
 
             if (!$data) {
@@ -428,7 +395,6 @@ switch ($endpoint) {
         $contact_id = (int)$_GET['id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get emergency contact by ID
             $contact = $contactModel->getById($contact_id, $user_id);
 
             if ($contact) {
@@ -438,7 +404,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Emergency contact not found']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-            // Update emergency contact
             $data = json_decode(file_get_contents('php://input'), true);
 
             if (!$data) {
@@ -469,7 +434,6 @@ switch ($endpoint) {
                 echo json_encode(['error' => 'Failed to update emergency contact']);
             }
         } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            // Delete emergency contact
             $result = $contactModel->delete($contact_id, $user_id);
 
             if ($result) {
@@ -484,10 +448,8 @@ switch ($endpoint) {
         }
         break;
 
-    // Notifications API
     case 'notifications':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get all notifications
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 0;
             $notifications = $notificationModel->getAll($user_id, $limit);
             echo json_encode($notifications ?: []);
@@ -499,7 +461,6 @@ switch ($endpoint) {
 
     case 'unread-notifications':
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            // Get unread notifications
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 0;
             $notifications = $notificationModel->getUnread($user_id, $limit);
             echo json_encode($notifications ?: []);
@@ -519,7 +480,6 @@ switch ($endpoint) {
         $notification_id = (int)$_GET['id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Mark notification as read
             $result = $notificationModel->markAsRead($notification_id, $user_id);
 
             if ($result) {
@@ -536,7 +496,6 @@ switch ($endpoint) {
 
     case 'mark-all-notifications':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Mark all notifications as read
             $result = $notificationModel->markAllAsRead($user_id);
 
             if ($result) {
@@ -551,7 +510,6 @@ switch ($endpoint) {
         }
         break;
 
-    // Theme API
     case 'set-theme':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = json_decode(file_get_contents('php://input'), true);

@@ -2,20 +2,20 @@
 <svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g opacity="0.2">
         <path d="M1440 0H0V900H1440V0Z" fill="url(#paint0_linear)"/>
-        <path d="M600.246 -330.762L422.089 278.72L1034.82 456.877L1212.98 -152.605L600.246 -330.762Z" stroke="#4E73DF" stroke-width="2"/>
-        <path d="M484.528 96.8033L311.282 688.606L909.339 861.852L1082.58 270.05L484.528 96.8033Z" stroke="#4E73DF" stroke-width="2"/>
-        <path d="M836.391 215.752L625.594 753.249L1175.42 964.046L1386.22 426.549L836.391 215.752Z" stroke="#4E73DF" stroke-width="2"/>
-        <path d="M276.382 143.54L92.9539 620.601L578.269 804.029L761.698 326.968L276.382 143.54Z" stroke="#4E73DF" stroke-width="2"/>
-        <circle cx="156.5" cy="235.5" r="85.5" stroke="#4E73DF" stroke-width="2"/>
-        <circle cx="268.5" cy="588.5" r="140.5" stroke="#4E73DF" stroke-width="2"/>
-        <circle cx="950.5" cy="663.5" r="111.5" stroke="#4E73DF" stroke-width="2"/>
-        <circle cx="1139.5" cy="252.5" r="98.5" stroke="#4E73DF" stroke-width="2"/>
-        <circle cx="640" cy="455" r="66" stroke="#4E73DF" stroke-width="2"/>
+        <path d="M600.246 -330.762L422.089 278.72L1034.82 456.877L1212.98 -152.605L600.246 -330.762Z" stroke="#000000" stroke-width="2"/>
+        <path d="M484.528 96.8033L311.282 688.606L909.339 861.852L1082.58 270.05L484.528 96.8033Z" stroke="#000000" stroke-width="2"/>
+        <path d="M836.391 215.752L625.594 753.249L1175.42 964.046L1386.22 426.549L836.391 215.752Z" stroke="#000000" stroke-width="2"/>
+        <path d="M276.382 143.54L92.9539 620.601L578.269 804.029L761.698 326.968L276.382 143.54Z" stroke="#000000" stroke-width="2"/>
+        <circle cx="156.5" cy="235.5" r="85.5" stroke="#000000" stroke-width="2"/>
+        <circle cx="268.5" cy="588.5" r="140.5" stroke="#000000" stroke-width="2"/>
+        <circle cx="950.5" cy="663.5" r="111.5" stroke="#000000" stroke-width="2"/>
+        <circle cx="1139.5" cy="252.5" r="98.5" stroke="#000000" stroke-width="2"/>
+        <circle cx="640" cy="455" r="66" stroke="#000000" stroke-width="2"/>
     </g>
     <defs>
         <linearGradient id="paint0_linear" x1="720" y1="0" x2="720" y2="900" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#4E73DF" stop-opacity="0.12"/>
-            <stop offset="1" stop-color="#4E73DF" stop-opacity="0"/>
+            <stop stop-color="#000000" stop-opacity="0.12"/>
+            <stop offset="1" stop-color="#000000" stop-opacity="0"/>
         </linearGradient>
     </defs>
 </svg>

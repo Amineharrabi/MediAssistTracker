@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Appointment Model (Supabase Version)
- */
+
 
 class Appointment
 {
@@ -53,12 +51,7 @@ class Appointment
         return json_decode($response, true);
     }
 
-    /**
-     * Get all appointments for a user
-     *
-     * @param int $user_id User ID
-     * @return array|bool Array of appointments if successful, false otherwise
-     */
+
     public function getAll($user_id)
     {
         $query = "?user_id=eq." . urlencode($user_id) . "&order=date.asc,time.asc";
@@ -67,13 +60,7 @@ class Appointment
         return $result ?: false;
     }
 
-    /**
-     * Get appointments for a specific date
-     *
-     * @param int $user_id User ID
-     * @param string $date Date in YYYY-MM-DD format
-     * @return array|bool Array of appointments if successful, false otherwise
-     */
+
     public function getByDate($user_id, $date)
     {
         $query = "?user_id=eq." . urlencode($user_id) . "&date=eq." . urlencode($date) . "&order=time.asc";
@@ -82,13 +69,6 @@ class Appointment
         return $result ?: false;
     }
 
-    /**
-     * Get an appointment by ID
-     *
-     * @param int $id Appointment ID
-     * @param int $user_id User ID (for security)
-     * @return array|bool Appointment data if found, false otherwise
-     */
     public function getById($id, $user_id)
     {
         $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
@@ -97,18 +77,7 @@ class Appointment
         return $result[0] ?? false;
     }
 
-    /**
-     * Create a new appointment
-     *
-     * @param string $title Appointment title
-     * @param string $doctor Doctor name
-     * @param string $location Location
-     * @param string $date Date in YYYY-MM-DD format
-     * @param string $time Time in HH:MM format
-     * @param string $notes Additional notes
-     * @param int $user_id User ID
-     * @return int|bool Appointment ID if successful, false otherwise
-     */
+
     public function create($title, $doctor, $location, $date, $time, $notes, $user_id)
     {
         $data = [
@@ -131,19 +100,7 @@ class Appointment
         return false;
     }
 
-    /**
-     * Update an appointment
-     *
-     * @param int $id Appointment ID
-     * @param string $title Appointment title
-     * @param string $doctor Doctor name
-     * @param string $location Location
-     * @param string $date Date in YYYY-MM-DD format
-     * @param string $time Time in HH:MM format
-     * @param string $notes Additional notes
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
+
     public function update($id, $title, $doctor, $location, $date, $time, $notes, $user_id)
     {
         $data = [
@@ -161,13 +118,7 @@ class Appointment
         return $result ? true : false;
     }
 
-    /**
-     * Delete an appointment
-     *
-     * @param int $id Appointment ID
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
+
     public function delete($id, $user_id)
     {
         $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
@@ -176,13 +127,6 @@ class Appointment
         return $result ? true : false;
     }
 
-    /**
-     * Get upcoming appointments for a user
-     *
-     * @param int $user_id User ID
-     * @param int $limit Number of appointments to return (default: 5)
-     * @return array|bool Array of appointments if successful, false otherwise
-     */
     public function getUpcoming($user_id, $limit = 5)
     {
         $today = date('Y-m-d');

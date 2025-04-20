@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="48" height="48" rx="8" fill="#4E73DF"/>
+    <rect width="48" height="48" rx="8" fill="#000000"/>
     <path d="M15 16C15 14.3431 16.3431 13 18 13H30C31.6569 13 33 14.3431 33 16V32C33 33.6569 31.6569 35 30 35H18C16.3431 35 15 33.6569 15 32V16Z" fill="white"/>
-    <rect x="19" y="17" width="10" height="2" rx="1" fill="#4E73DF"/>
-    <rect x="19" y="21" width="10" height="2" rx="1" fill="#4E73DF"/>
-    <rect x="19" y="25" width="6" height="2" rx="1" fill="#4E73DF"/>
-    <rect x="19" y="29" width="8" height="2" rx="1" fill="#4E73DF"/>
+    <rect x="19" y="17" width="10" height="2" rx="1" fill="#000000"/>
+    <rect x="19" y="21" width="10" height="2" rx="1" fill="#000000"/>
+    <rect x="19" y="25" width="6" height="2" rx="1" fill="#000000"/>
+    <rect x="19" y="29" width="8" height="2" rx="1" fill="#000000"/>
     <path d="M24.5 11V13" stroke="white" stroke-width="2" stroke-linecap="round"/>
     <path d="M29 12L28 14" stroke="white" stroke-width="2" stroke-linecap="round"/>
     <path d="M19 12L20 14" stroke="white" stroke-width="2" stroke-linecap="round"/>

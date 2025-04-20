@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Prescription Model (Supabase Version)
- */
+
 
 class Prescription
 {

@@ -1,87 +1,129 @@
-{% extends 'base.html' %}
-
-{% block title %}MediAssist - Medications{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}MediAssist - Medications{% endblock
+%} {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="h2 mb-0"><i class="fas fa-pills me-2"></i>My Medications</h1>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-medication-modal">
-        <i class="fas fa-plus me-1"></i> Add Medication
-    </button>
+  <h1 class="h2 mb-0">
+    <i class="fas fa-laptop-medical me-2"></i>My Medications
+  </h1>
+  <button
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#add-medication-modal"
+  >
+    <i class="fas fa-plus me-1"></i> Add Medication
+  </button>
 </div>
 
 <div id="alert-container"></div>
 
 <div id="medications-list">
-    <!-- Medications will be loaded here via JavaScript -->
+  <!-- Medications will be loaded here via JavaScript -->
 </div>
 
 <!-- Add/Edit Medication Modal -->
-<div class="modal fade" id="add-medication-modal" tabindex="-1" aria-labelledby="medication-modal-title" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="medication-modal-title">Add New Medication</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="medication-form">
-                    <div class="mb-3">
-                        <label for="medication-name" class="form-label">Medication Name</label>
-                        <input type="text" class="form-control" id="medication-name" required>
-                        <div class="invalid-feedback">Medication name is required</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="medication-dosage" class="form-label">Dosage</label>
-                        <input type="text" class="form-control" id="medication-dosage" placeholder="e.g., 10mg, 1 tablet" required>
-                        <div class="invalid-feedback">Dosage is required</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="medication-frequency" class="form-label">Frequency</label>
-                        <select class="form-select" id="medication-frequency" required>
-                            <option value="">Select frequency</option>
-                            <option value="Once daily">Once daily</option>
-                            <option value="Twice daily">Twice daily</option>
-                            <option value="Three times daily">Three times daily</option>
-                            <option value="Every morning">Every morning</option>
-                            <option value="Every evening">Every evening</option>
-                            <option value="As needed">As needed</option>
-                            <option value="Weekly">Weekly</option>
-                            <option value="Monthly">Monthly</option>
-                        </select>
-                        <div class="invalid-feedback">Please select a frequency</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Time(s) to Take</label>
-                        <div id="time-slots-container">
-                            <div class="time-slot input-group mb-2">
-                                <input type="time" class="form-control" name="time[]">
-                                <button type="button" class="btn btn-outline-secondary" id="add-time-btn">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-text">Add times when you need to take this medication</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="medication-notes" class="form-label">Notes</label>
-                        <textarea class="form-control" id="medication-notes" rows="3" placeholder="Additional information about this medication"></textarea>
-                    </div>
-                    
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">Save Medication</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<div
+  class="modal fade"
+  id="add-medication-modal"
+  tabindex="-1"
+  aria-labelledby="medication-modal-title"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="medication-modal-title">
+          Add New Medication
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="medication-form">
+          <div class="mb-3">
+            <label for="medication-name" class="form-label"
+              >Medication Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="medication-name"
+              required
+            />
+            <div class="invalid-feedback">Medication name is required</div>
+          </div>
 
-{% block scripts %}
+          <div class="mb-3">
+            <label for="medication-dosage" class="form-label">Dosage</label>
+            <input
+              type="text"
+              class="form-control"
+              id="medication-dosage"
+              placeholder="e.g., 10mg, 1 tablet"
+              required
+            />
+            <div class="invalid-feedback">Dosage is required</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="medication-frequency" class="form-label"
+              >Frequency</label
+            >
+            <select class="form-select" id="medication-frequency" required>
+              <option value="">Select frequency</option>
+              <option value="Once daily">Once daily</option>
+              <option value="Twice daily">Twice daily</option>
+              <option value="Three times daily">Three times daily</option>
+              <option value="Every morning">Every morning</option>
+              <option value="Every evening">Every evening</option>
+              <option value="As needed">As needed</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+            </select>
+            <div class="invalid-feedback">Please select a frequency</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Time(s) to Take</label>
+            <div id="time-slots-container">
+              <div class="time-slot input-group mb-2">
+                <input type="time" class="form-control" name="time[]" />
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  id="add-time-btn"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="form-text">
+              Add times when you need to take this medication
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="medication-notes" class="form-label">Notes</label>
+            <textarea
+              class="form-control"
+              id="medication-notes"
+              rows="3"
+              placeholder="Additional information about this medication"
+            ></textarea>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">
+              Save Medication
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
 <script src="{{ url_for('static', filename='js/medications.js') }}"></script>
 {% endblock %}

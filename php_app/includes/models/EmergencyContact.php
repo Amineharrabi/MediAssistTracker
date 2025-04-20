@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Emergency Contact Model (Supabase Version)
- */
+
 
 class EmergencyContact
 {
@@ -53,12 +51,7 @@ class EmergencyContact
         return json_decode($response, true);
     }
 
-    /**
-     * Get all emergency contacts for a user
-     *
-     * @param int $user_id User ID
-     * @return array|bool Array of contacts if successful, false otherwise
-     */
+
     public function getAll($user_id)
     {
         $query = "?user_id=eq." . urlencode($user_id);
@@ -67,13 +60,7 @@ class EmergencyContact
         return $result ?: false;
     }
 
-    /**
-     * Get an emergency contact by ID
-     *
-     * @param int $id Contact ID
-     * @param int $user_id User ID (for security)
-     * @return array|bool Contact data if found, false otherwise
-     */
+
     public function getById($id, $user_id)
     {
         $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);
@@ -82,17 +69,7 @@ class EmergencyContact
         return $result[0] ?? false;
     }
 
-    /**
-     * Create a new emergency contact
-     *
-     * @param string $name Contact name
-     * @param string $relationship Relationship to user
-     * @param string $phone Phone number
-     * @param string $email Email address
-     * @param string $notes Additional notes
-     * @param int $user_id User ID
-     * @return int|bool Contact ID if successful, false otherwise
-     */
+
     public function create($name, $relationship, $phone, $email, $notes, $user_id)
     {
         $data = [
@@ -114,18 +91,7 @@ class EmergencyContact
         return false;
     }
 
-    /**
-     * Update an emergency contact
-     *
-     * @param int $id Contact ID
-     * @param string $name Contact name
-     * @param string $relationship Relationship to user
-     * @param string $phone Phone number
-     * @param string $email Email address
-     * @param string $notes Additional notes
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
+
     public function update($id, $name, $relationship, $phone, $email, $notes, $user_id)
     {
         $data = [
@@ -142,13 +108,7 @@ class EmergencyContact
         return $result ? true : false;
     }
 
-    /**
-     * Delete an emergency contact
-     *
-     * @param int $id Contact ID
-     * @param int $user_id User ID (for security)
-     * @return bool True if successful, false otherwise
-     */
+
     public function delete($id, $user_id)
     {
         $query = "?id=eq." . urlencode($id) . "&user_id=eq." . urlencode($user_id);

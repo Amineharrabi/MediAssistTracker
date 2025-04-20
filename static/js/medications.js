@@ -57,7 +57,7 @@ function displayMedications(medications) {
         medicationsList.innerHTML = `
             <div class="text-center py-4">
                 <div class="mb-3">
-                    <i class="fas fa-pills fa-3x text-muted"></i>
+                    <i class="fas fa-laptop-medical fa-3x text-muted"></i>
                 </div>
                 <h5>No medications added yet</h5>
                 <p class="text-muted">Add your first medication to get started</p>

@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Notification Model (Supabase Version)
- */
+
 
 class Notification
 {

@@ -1,7 +1,5 @@
 <?php
-/**
- * User Model (Supabase Version)
- */
+
 
 class User {
     private $supabaseUrl;
