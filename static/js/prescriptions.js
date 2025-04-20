@@ -183,6 +183,14 @@ function handlePrescriptionFormSubmit(event) {
     if (!isValid) {
         return false;
     }
+    function readImageAsBase64(file, callback) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            callback(e.target.result.split(',')[1]); // remove the data:image/jpeg;base64, prefix
+        };
+        reader.readAsDataURL(file);
+    }
+    
     
     // Create FormData for file upload
     const formData = new FormData(form);

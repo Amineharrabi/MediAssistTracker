@@ -13,6 +13,10 @@ MediAssist Tracker is a web-based application designed to help users manage thei
 
 ---
 
+**Try the Website !**
+https://mediassisttracker.onrender.com
+ONLINE 24/7
+
 ## Features
 
 - **User Authentication**: Register, login, and logout functionality.
@@ -30,40 +34,49 @@ MediAssist Tracker is a web-based application designed to help users manage thei
 ### Prerequisites
 
 - PHP 7.4 or higher
-- PostgreSQL database
-- Web server (e.g., Apache or Nginx)
+- PostgreSQL database or Supabase (used here)
+- Web server (Nginx)
 - Composer (optional, but not used in this setup)
 
 ### Steps
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/Amineharrabi/MediAssistTracker.git
    cd MediAssistTracker
 
+   ```
+
 2. **Set Up the Database**:
-Import the mediassist.sql file into your PostgreSQL database:
+   Import the mediassist.sql file into your PostgreSQL database:
+
 ```bash
 psql -U postgres -d MedAssistTracker -f mediassist.sql
 ```
 
+setup Supabase:
+create a new project ->
+get the SUPABASE_URL
+get the SUPABASE_KEY (example :
+SUPABASE_URL=https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.supabase.co
+SUPABASE_KEY=kjgKJhjhEBljfIDYDnKDldnf5fffkkJFnfKNFKJDnsHTsIUFKjLF?kjhjlkqzJKLDJGLZ65xjGKDbJKFkjXx)
+
 Update the .env file in config with your database credentials:
 
-DB_HOST=your_database_host
-DB_PORT=5432
-DB_NAME=MedAssistTracker
-DB_USER=your_database_user
-DB_PASS=your_database_password
+SUPABASE_URL=https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.supabase.co
+SUPABASE_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
 
 3. **Configure the Environment:**
-Ensure the phpdotenv library is installed manually in the phpdotenv directory.
-Update the database.php file to load environment variables using phpdotenv.
+   Ensure the phpdotenv library is installed manually in the phpdotenv directory.
+   Update the database.php file to load environment variables using phpdotenv.
 4. **Set Up the Web Server**:
+   -setup render
+   push your github fork to render , open a docker project modify the CMD docker command at the end of the dockerfile
 
-
-
-
-
+```bash
+CMD ["php", "-S", "0.0.0.0:PORT", "-t", "php_app/public"]
+```
 
 5.**Usage**
 User Authentication
@@ -77,7 +90,6 @@ Add, update, delete, and view your medications.
 Appointments
 Schedule and manage your appointments.
 
-
 Upload and manage your prescriptions.
 Emergency Contacts
 Store and manage emergency contact information.
@@ -85,7 +97,6 @@ Notifications
 Receive reminders for medications and appointments.
 
 6.**Troubleshooting**
-
 
 Ensure the .env file is correctly configured with your database credentials.
 Verify that the PostgreSQL service is running.
@@ -98,9 +109,7 @@ CSS/JS Not Loading:
 Ensure the assets directory is accessible from the web server.
 Check the browser console for errors.
 
-
 5.**Project Structure**
-
 
 ```
 MediAssistTracker

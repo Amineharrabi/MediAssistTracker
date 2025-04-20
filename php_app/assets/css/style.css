@@ -284,3 +284,19 @@ h1, h2, h3, h4, h5, h6 {
     background-size: 20px 20px;
     pointer-events: none;
 }
+.prescription-image-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.prescription-thumbnail {
+    max-height: 200px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
