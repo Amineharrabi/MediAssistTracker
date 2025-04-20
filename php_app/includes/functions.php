@@ -74,10 +74,9 @@ function get_current_date($format = 'Y-m-d')
 
 function format_date($date)
 {
-    $timestamp = strtotime($date);
-    return date('F j, Y', $timestamp);
+    $timestamp = strtotime((string)$date);
+    return $timestamp !== false ? date('F j, Y', $timestamp) : '';
 }
-
 
 function format_time($time)
 {
