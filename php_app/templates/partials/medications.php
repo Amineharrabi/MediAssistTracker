@@ -44,7 +44,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
                                         <button class="dropdown-item edit-medication" type="button" data-id="<?php echo $medication['id']; ?>">
-                                            <i class="fas fa-edit me-2"></i> Edit
+                                            <i class="fas fa-pencil-alt me-2"></i> Edit
                                         </button>
                                     </li>
                                     <li>
@@ -99,9 +99,9 @@
                     </div>
                     <div class="card-footer bg-transparent border-0 text-muted small">
                         <div class="d-flex justify-content-between">
-                            <span><i class="fas fa-calendar-alt me-1"></i> Added: <?php echo format_date($medication['created_at']); ?></span>
+                            <span><i class="fa-solid fa-calendar-days me-1"></i> Added: <?php echo format_date($medication['created_at']); ?></span>
                             <?php if ($medication['updated_at'] != $medication['created_at']): ?>
-                                <span><i class="fas fa-edit me-1"></i> Updated: <?php echo format_date($medication['updated_at']); ?></span>
+                                <span><i class="fas fa-pencil-alt me-1"></i> Updated: <?php echo format_date($medication['updated_at']); ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                 });
 
                 // Update modal title
-                document.getElementById('addMedicationModalLabel').innerHTML = '<i class="fas fa-edit me-2"></i> Edit Medication';
+                document.getElementById('addMedicationModalLabel').innerHTML = '<i class="fas fa-pencil-alt me-2"></i> Edit Medication';
 
                 // Show the modal
                 const modal = new bootstrap.Modal(document.getElementById('addMedicationModal'));
@@ -556,7 +556,7 @@
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <button class="dropdown-item edit-medication" type="button" data-id="${medication.id}">
-                                                <i class="fas fa-edit me-2"></i> Edit
+                                                <i class="fas fa-pencil-alt me-2"></i> Edit
                                             </button>
                                         </li>
                                         <li>
@@ -604,9 +604,9 @@
                         </div>
                         <div class="card-footer bg-transparent border-0 text-muted small">
                             <div class="d-flex justify-content-between">
-                                <span><i class="fas fa-calendar-alt me-1"></i> Added: ${formatDate(medication.created_at)}</span>
+                                <span><i class="fa-solid fa-calendar-days me-1"></i> Added: ${formatDate(medication.created_at)}</span>
                                 ${medication.updated_at !== medication.created_at ? 
-                                    `<span><i class="fas fa-edit me-1"></i> Updated: ${formatDate(medication.updated_at)}</span>` : ''}
+                                    `<span><i class="fas fa-pencil-alt me-1"></i> Updated: ${formatDate(medication.updated_at)}</span>` : ''}
                             </div>
                         </div>
                     </div>

@@ -94,7 +94,7 @@ function displayPrescriptions(prescriptions) {
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item view-prescription" href="#" data-id="${prescription.id}"><i class="fas fa-eye me-2"></i>View</a></li>
-                                <li><a class="dropdown-item edit-prescription" href="#" data-id="${prescription.id}"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                <li><a class="dropdown-item edit-prescription" href="#" data-id="${prescription.id}"><i class="fas fa-pencil-alt me-2"></i>Edit</a></li>
                                 <li><a class="dropdown-item delete-prescription" href="#" data-id="${prescription.id}"><i class="fas fa-trash me-2"></i>Delete</a></li>
                             </ul>
                         </div>

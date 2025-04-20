@@ -86,7 +86,7 @@ function displayContacts(contacts) {
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item call-contact" href="tel:${contact.phone}"><i class="fas fa-phone me-2"></i>Call</a></li>
                                 ${contact.email ? `<li><a class="dropdown-item email-contact" href="mailto:${contact.email}"><i class="fas fa-envelope me-2"></i>Email</a></li>` : ''}
-                                <li><a class="dropdown-item edit-contact" href="#" data-id="${contact.id}"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                <li><a class="dropdown-item edit-contact" href="#" data-id="${contact.id}"><i class="fas fa-pencil-alt me-2"></i>Edit</a></li>
                                 <li><a class="dropdown-item delete-contact" href="#" data-id="${contact.id}"><i class="fas fa-trash me-2"></i>Delete</a></li>
                             </ul>
                         </div>

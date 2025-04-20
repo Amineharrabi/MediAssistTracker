@@ -64,7 +64,7 @@ function displayAppointments(appointments) {
         appointmentsList.innerHTML = `
             <div class="text-center py-4">
                 <div class="mb-3">
-                    <i class="fas fa-calendar-alt fa-3x text-muted"></i>
+                    <i class="fa-solid fa-calendar-days fa-3x text-muted"></i>
                 </div>
                 <h5>No appointments scheduled</h5>
                 <p class="text-muted">Schedule your first appointment to get started</p>
@@ -143,7 +143,7 @@ function displayAppointments(appointments) {
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item edit-appointment" href="#" data-id="${appointment.id}"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                <li><a class="dropdown-item edit-appointment" href="#" data-id="${appointment.id}"><i class="fas fa-pencil-alt me-2"></i>Edit</a></li>
                                 <li><a class="dropdown-item delete-appointment" href="#" data-id="${appointment.id}"><i class="fas fa-trash me-2"></i>Delete</a></li>
                             </ul>
                         </div>

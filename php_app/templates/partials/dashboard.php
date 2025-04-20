@@ -17,7 +17,7 @@
         <div class="card shadow-sm h-100">
             <div class="card-header bg-transparent">
                 <h5 class="mb-0">
-                    <i class="fas fa-calendar-alt me-2 text-primary"></i> Upcoming Appointments
+                    <i class="fa-solid fa-calendar-days me-2 text-primary"></i> Upcoming Appointments
                 </h5>
             </div>
             <div class="card-body">

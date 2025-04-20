@@ -80,7 +80,7 @@ block content %}
       <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
           <h5 class="mb-0">
-            <i class="fas fa-calendar-alt me-2"></i>Upcoming Appointments
+            <i class="fa-solid fa-calendar-days me-2"></i>Upcoming Appointments
           </h5>
           <a
             href="{{ url_for('appointments') }}"
@@ -111,13 +111,13 @@ block content %}
         </ul>
         <div class="text-center mt-3">
           <a href="{{ url_for('appointments') }}" class="btn btn-primary">
-            <i class="fas fa-calendar-alt me-1"></i> Manage Appointments
+            <i class="fa-solid fa-calendar-days me-1"></i> Manage Appointments
           </a>
         </div>
         {% else %}
         <div class="text-center py-4">
           <div class="mb-3">
-            <i class="fas fa-calendar-alt fa-3x text-muted"></i>
+            <i class="fa-solid fa-calendar-days fa-3x text-muted"></i>
           </div>
           <h5>No upcoming appointments</h5>
           <p class="text-muted">

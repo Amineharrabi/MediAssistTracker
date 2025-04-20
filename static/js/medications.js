@@ -103,7 +103,7 @@ function displayMedications(medications) {
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item edit-medication" href="#" data-id="${medication.id}"><i class="fas fa-edit me-2"></i>Edit</a></li>
+                                <li><a class="dropdown-item edit-medication" href="#" data-id="${medication.id}"><i class="fas fa-pencil-alt me-2"></i>Edit</a></li>
                                 <li><a class="dropdown-item delete-medication" href="#" data-id="${medication.id}"><i class="fas fa-trash me-2"></i>Delete</a></li>
                             </ul>
                         </div>

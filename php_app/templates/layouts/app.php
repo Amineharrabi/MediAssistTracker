@@ -143,12 +143,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo $route === 'appointments' ? 'active' : ''; ?>" href="/index.php?route=appointments">
-                            <i class="fas fa-calendar-alt me-1"></i> Appointments
+                            <i class="fa-solid fa-calendar-days me-1"></i> Appointments
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo $route === 'prescriptions' ? 'active' : ''; ?>" href="/index.php?route=prescriptions">
-                            <i class="fas fa-file-prescription me-1"></i> Prescriptions
+                            <i class="fa-solid fa-file-waveform me-1"></i> Prescriptions
                         </a>
                     </li>
                     <li class="nav-item">
@@ -191,7 +191,7 @@
                     <!-- User Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle me-1"></i>
+                            <i class="fa-regular fa-user me-1"></i>
                             <span class="d-none d-md-inline"><?php echo $_SESSION['username'] ?? 'User'; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
