@@ -30,7 +30,8 @@
                         </a>
                     </div>
                 <?php else: ?>
-                    <div class="list-group list-group-flush">
+                    <div class="list-group list-group-flush"   style ="background-color: var(--primary-color);"
+                    >
                         <?php foreach ($upcoming_appointments as $appointment): ?>
                             <div class="list-group-item border-0 px-0">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -86,7 +87,7 @@
                         </a>
                     </div>
                 <?php else: ?>
-                    <div class="list-group list-group-flush">
+                    <div class="list-group list-group-flush" style ="background-color: var(--primary-color);">
                         <?php
                         // Display only the first 5 medications
                         $count = 0;
@@ -146,7 +147,8 @@
                         </a>
                     </div>
                 <?php else: ?>
-                    <div class="list-group list-group-flush">
+                    <div class="list-group list-group-flush" style="background-color: var(--primary-color);
+">
                         <?php
                         // Display only the first 3 contacts
                         $count = 0;
@@ -235,3 +237,8 @@
         </div>
     </div>
 </div>
+<style>
+    .list-group list-group-flush {
+        background-color: var(--primary-color);
+    }
+</style>

@@ -29,7 +29,7 @@ block content %}
       </div>
       <div class="card-body">
         {% if medications %}
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" style ="background-color: var(--primary-color);">
           {% for medication in medications[:3] %}
           <li class="list-group-item px-0">
             <div class="d-flex justify-content-between align-items-start">
@@ -91,7 +91,7 @@ block content %}
       </div>
       <div class="card-body">
         {% if upcoming_appointments %}
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" style ="background-color: var(--primary-color);">
           {% for appointment in upcoming_appointments %}
           <li class="list-group-item px-0">
             <h6 class="mb-1">{{ appointment.title }}</h6>
@@ -140,7 +140,7 @@ block content %}
       </div>
       <div class="card-body">
         {% if notifications %}
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" style ="background-color: var(--primary-color);">
           {% for notification in notifications[:5] %}
           <li
             class="list-group-item px-0 notification-item {% if not notification.is_read %}unread{% endif %}"
@@ -440,7 +440,6 @@ block content %}
 </div>
 {% endif %} {% endblock %} {% block scripts %}
 <script>
-  // Custom function to parse JSON string from Jinja
   function tojson_parse(json_str) {
     try {
       return JSON.parse(json_str);

@@ -74,7 +74,7 @@
                         </button>
                     </div>
                 <?php else: ?>
-                    <div class="list-group list-group-flush">
+                    <div class="list-group list-group-flush" style="background-color: var(--primary-color);">
                         <?php
                         // Sort appointments by date
                         usort($appointments, function ($a, $b) {
@@ -410,6 +410,11 @@
         background-color: var(--primary-color);
         color: white;
         border-radius: 50%;
+    }
+
+    .list-group list-group-flush {
+        background-color: var(--primary-color);
+
     }
 
     .appointment-dot {

@@ -617,11 +617,7 @@
         container.innerHTML = html;
     }
 
-    /**
-     * Formats a date for display
-     * @param {string} dateStr - Date string
-     * @returns {string} Formatted date string
-     */
+
     function formatDate(dateStr) {
         const date = new Date(dateStr);
         return date.toLocaleDateString('en-US', {
@@ -631,11 +627,7 @@
         });
     }
 
-    /**
-     * Formats a time for display
-     * @param {string} timeStr - Time string (HH:MM:SS)
-     * @returns {string} Formatted time string (12-hour format)
-     */
+
     function formatTime(timeStr) {
         const date = new Date(`2000-01-01T${timeStr}`);
         return date.toLocaleTimeString('en-US', {
@@ -645,11 +637,7 @@
         });
     }
 
-    /**
-     * Escapes HTML special characters
-     * @param {string} text - Text to escape
-     * @returns {string} Escaped text
-     */
+
     function escapeHtml(text) {
         if (!text) return '';
         return text
@@ -660,11 +648,6 @@
             .replace(/'/g, "&#039;");
     }
 
-    /**
-     * Shows an alert message
-     * @param {string} message - The message to show
-     * @param {string} type - The type of alert (success, danger, warning, info)
-     */
     function showAlert(message, type = 'info') {
         const alertContainer = document.getElementById('flash-messages');
 
