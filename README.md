@@ -29,9 +29,9 @@ ONLINE 24/7
 
 ---
 ## screenshots
-![Screenshot 1]<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR1.png?raw=true" alt="Screenshot 1" width="300"/>
-![Screenshot 1]<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR2.png?raw=true" alt="Screenshot 2" width="300"/>
-![Screenshot 1]<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR3.png?raw=true" alt="Screenshot 3" width="300"/>
+<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR1.png?raw=true" alt="Screenshot 1" width="300"/>
+<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR2.png?raw=true" alt="Screenshot 2" width="300"/>
+<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR3.png?raw=true" alt="Screenshot 3" width="300"/>
 
 
 
