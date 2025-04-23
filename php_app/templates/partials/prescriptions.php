@@ -1,5 +1,8 @@
 <div class="row mb-4">
     <div class="col-12">
+        <!-- Alert container for notifications -->
+        <div id="alert-container"></div>
+        
         <div class="card shadow-sm">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -249,6 +252,8 @@
     </div>
 </div>
 
+<!-- Load Scripts -->
+<script src="/static/js/utility.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Load prescriptions on page load

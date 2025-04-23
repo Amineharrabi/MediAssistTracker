@@ -1,4 +1,6 @@
 <?php
+require_once dirname(dirname(__DIR__)) . '/config/supabase.php';
+
 class User {
     private $supabaseUrl;
     private $supabaseKey;
@@ -10,48 +12,51 @@ class User {
     }
 
     private function makeRequest($method, $endpoint, $data = null, $queryParams = '', $isAuth = false) {
-        $url = $isAuth 
-            ? "$this->supabaseUrl/auth/v1/$endpoint$queryParams"
-            : "$this->supabaseUrl/rest/v1/$endpoint$queryParams";
+        return SupabaseConfig::handleRequest(function() use ($method, $endpoint, $data, $queryParams, $isAuth) {
+            $url = $isAuth 
+                ? "$this->supabaseUrl/auth/v1/$endpoint$queryParams"
+                : "$this->supabaseUrl/rest/v1/$endpoint$queryParams";
 
-        $headers = [
-            "apikey: $this->supabaseKey",
-            "Authorization: Bearer $this->supabaseKey",
-            "Content-Type: application/json",
-            "Prefer: return=representation"
-        ];
+            $options = SupabaseConfig::getRequestOptions();
+            $headers = [
+                "apikey: $this->supabaseKey",
+                "Authorization: Bearer $this->supabaseKey",
+                "Content-Type: application/json",
+                "Prefer: return=representation"
+            ];
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $options['timeout']);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $options['connect_timeout']);
 
-        if ($method === 'POST') {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        } elseif ($method === 'PATCH') {
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        }
+            if ($method === 'POST') {
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            } elseif ($method === 'PATCH') {
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+            }
 
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $error = curl_error($ch);
-        curl_close($ch);
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $error = curl_error($ch);
+            curl_close($ch);
 
-        if ($error) {
-            add_flash_message("cURL Error: $error", 'danger');
-            return false;
-        }
+            if ($error) {
+                throw new Exception("cURL Error: $error");
+            }
 
-        $result = json_decode($response, true);
-        
-        if ($httpCode >= 400) {
-            $errorMessage = $result['error']['message'] ?? 'An unknown error occurred';
-            add_flash_message($errorMessage, 'danger');
-            return false;
-        }
+            $result = json_decode($response, true);
+            
+            if ($httpCode >= 400) {
+                $errorMessage = $result['error']['message'] ?? 'An unknown error occurred';
+                throw new Exception($errorMessage);
+            }
 
-        return $result;
+            return $result;
+        });
     }
 
     public function create($username, $email, $password) {
@@ -228,9 +233,9 @@ class User {
         // Set session variables
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        $_SESSION['user_theme'] = $user['theme_preference'];
+        $_SESSION['email'] = $user['email'];
         $_SESSION['access_token'] = $result['access_token'];
-        $_SESSION['refresh_token'] = $result['refresh_token'];
+        $_SESSION['refresh_token'] = $result['refresh_token'] ?? null;
 
         return true;
     }

@@ -1,0 +1,25 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# If the request is for a real file or directory, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Serve static files directly
+RewriteRule ^static/(.*)$ static/$1 [L]
+
+# Route everything else through index.php
+RewriteRule ^ index.php [L]
+
+# Set proper MIME types
+AddType application/javascript .js
+AddType text/css .css
+
+# Enable CORS for static files
+<FilesMatch "\.(js|css)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes 

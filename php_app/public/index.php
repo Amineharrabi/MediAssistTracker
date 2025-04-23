@@ -1,4 +1,9 @@
 <?php
+// Set appropriate timeout values
+set_time_limit(300); // 5 minutes
+ini_set('max_execution_time', 300);
+ini_set('default_socket_timeout', 300);
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -235,6 +240,55 @@ switch ($route) {
             'user' => $user,
             'route' => $route
         ]);
+        break;
+
+    case 'prescription':
+        if (!is_logged_in()) {
+            redirect('/index.php?route=login');
+        }
+
+        $action = $_GET['action'] ?? '';
+        $prescriptionId = $_GET['id'] ?? null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($action === 'create' || $action === 'update') {
+                $title = sanitize($_POST['title'] ?? '');
+                $date = sanitize($_POST['date'] ?? '');
+                $doctor = sanitize($_POST['doctor'] ?? '');
+                $notes = sanitize($_POST['notes'] ?? '');
+                
+                // Handle image upload if present
+                $imageData = null;
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    $imageData = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
+                }
+
+                $data = [
+                    'title' => $title,
+                    'date' => $date,
+                    'doctor' => $doctor,
+                    'notes' => $notes,
+                    'user_id' => get_user_id()
+                ];
+
+                if ($imageData) {
+                    $data['image_data'] = $imageData;
+                }
+
+                if ($action === 'create') {
+                    $result = $prescriptionModel->create($data);
+                } else {
+                    $result = $prescriptionModel->update($prescriptionId, $data);
+                }
+
+                if ($result) {
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false, 'error' => 'Failed to save prescription']);
+                }
+                exit;
+            }
+        }
         break;
 
     case 'home':

@@ -246,18 +246,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/notifications.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/notifications.js"></script>
 
     <!-- Page-specific JS -->
     <?php if ($route === 'medications'): ?>
-        <script src="/assets/js/medications.js"></script>
+        <script src="/static/js/medications.js"></script>
     <?php elseif ($route === 'appointments'): ?>
-        <script src="/assets/js/appointments.js"></script>
+        <script src="/static/js/appointments.js"></script>
     <?php elseif ($route === 'prescriptions'): ?>
-        <script src="/assets/js/prescriptions.js"></script>
+        <script src="/static/js/prescriptions.js"></script>
     <?php elseif ($route === 'contacts'): ?>
-        <script src="/assets/js/contacts.js"></script>
+        <script src="/static/js/contacts.js"></script>
     <?php endif; ?>
 </body>
 
