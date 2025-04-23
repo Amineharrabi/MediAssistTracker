@@ -28,15 +28,22 @@ ONLINE 24/7
 - **Light/Dark Theme Toggle**: User preference for light or dark mode.
 
 ---
+## screenshots
+<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR1.png?raw=true" alt="Screenshot 1" width="300"/>
+<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR2.png?raw=true" alt="Screenshot 2" width="300"/>
+<img src="https://github.com/Amineharrabi/MediAssistTracker/blob/main/templates/SCR3.png?raw=true" alt="Screenshot 3" width="300"/>
 
-## Installation
+
+
+
 
 ### Prerequisites
 
 - PHP 7.4 or higher
-- PostgreSQL database or Supabase (used here)
+- PostgreSQL database and Supabase (used here)
 - Web server (Nginx)
 - Composer (optional, but not used in this setup)
+## Installation
 
 ### Steps
 
