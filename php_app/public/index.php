@@ -256,7 +256,7 @@ switch ($route) {
                 $date = sanitize($_POST['date'] ?? '');
                 $doctor = sanitize($_POST['doctor'] ?? '');
                 $notes = sanitize($_POST['notes'] ?? '');
-                
+
                 // Handle image upload if present
                 $imageData = null;
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -276,9 +276,24 @@ switch ($route) {
                 }
 
                 if ($action === 'create') {
-                    $result = $prescriptionModel->create($data);
+                    $result = $prescriptionModel->create(
+                        $title,
+                        $doctor,
+                        $date,
+                        $imageData,
+                        $notes,
+                        get_user_id()
+                    );
                 } else {
-                    $result = $prescriptionModel->update($prescriptionId, $data);
+                    $result = $prescriptionModel->update(
+                        $prescriptionId,
+                        $title,
+                        $doctor,
+                        $date,
+                        $imageData,
+                        $notes,
+                        get_user_id()
+                    );
                 }
 
                 if ($result) {

@@ -1,19 +1,22 @@
 <?php
 require_once dirname(dirname(__DIR__)) . '/config/supabase.php';
 
-class User {
+class User
+{
     private $supabaseUrl;
     private $supabaseKey;
     private $table = 'user';
 
-    public function __construct($supabaseUrl, $supabaseKey) {
+    public function __construct($supabaseUrl, $supabaseKey)
+    {
         $this->supabaseUrl = $supabaseUrl;
         $this->supabaseKey = $supabaseKey;
     }
 
-    private function makeRequest($method, $endpoint, $data = null, $queryParams = '', $isAuth = false) {
-        return SupabaseConfig::handleRequest(function() use ($method, $endpoint, $data, $queryParams, $isAuth) {
-            $url = $isAuth 
+    private function makeRequest($method, $endpoint, $data = null, $queryParams = '', $isAuth = false)
+    {
+        return SupabaseConfig::handleRequest(function () use ($method, $endpoint, $data, $queryParams, $isAuth) {
+            $url = $isAuth
                 ? "$this->supabaseUrl/auth/v1/$endpoint$queryParams"
                 : "$this->supabaseUrl/rest/v1/$endpoint$queryParams";
 
@@ -49,7 +52,7 @@ class User {
             }
 
             $result = json_decode($response, true);
-            
+
             if ($httpCode >= 400) {
                 $errorMessage = $result['error']['message'] ?? 'An unknown error occurred';
                 throw new Exception($errorMessage);
@@ -59,7 +62,8 @@ class User {
         });
     }
 
-    public function create($username, $email, $password) {
+    public function create($username, $email, $password)
+    {
         // First, create the auth user
         $authData = [
             'email' => $email,
@@ -102,28 +106,32 @@ class User {
         return $authResult['id'];
     }
 
-    public function findByUsername($username) {
+    public function findByUsername($username)
+    {
         $query = "?username=eq." . urlencode($username);
         $result = $this->makeRequest('GET', $this->table, null, $query);
 
         return $result[0] ?? false;
     }
 
-    public function findByEmail($email) {
+    public function findByEmail($email)
+    {
         $query = "?email=eq." . urlencode($email);
         $result = $this->makeRequest('GET', $this->table, null, $query);
 
         return $result[0] ?? false;
     }
 
-    public function findById($id) {
+    public function findById($id)
+    {
         $query = "?id=eq." . urlencode($id);
         $result = $this->makeRequest('GET', $this->table, null, $query);
 
         return $result[0] ?? false;
     }
 
-    public function login($email, $password) {
+    public function login($email, $password)
+    {
         $data = [
             'email' => $email,
             'password' => $password
@@ -150,11 +158,11 @@ class User {
         ];
 
         $url = "$this->supabaseUrl/rest/v1/$this->table?email=eq." . urlencode($email);
-        
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
+
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
@@ -171,7 +179,7 @@ class User {
         if (!$userData || empty($userData)) {
             // Extract username from email (everything before @)
             $username = explode('@', $email)[0];
-            
+
             // Create user profile - use a numeric ID instead of UUID
             $profileData = [
                 'id' => rand(1000, 9999), // Generate a random numeric ID
@@ -180,7 +188,7 @@ class User {
                 'theme_preference' => 'light',
                 'password_hash' => hash_password($password) // Add password hash
             ];
-            
+
             // Use direct curl for better error handling
             $createUrl = "$this->supabaseUrl/rest/v1/$this->table";
             $createHeaders = [
@@ -189,37 +197,37 @@ class User {
                 "Content-Type: application/json",
                 "Prefer: return=representation"
             ];
-            
+
             $createCh = curl_init($createUrl);
             curl_setopt($createCh, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($createCh, CURLOPT_POST, true);
             curl_setopt($createCh, CURLOPT_POSTFIELDS, json_encode($profileData));
             curl_setopt($createCh, CURLOPT_HTTPHEADER, $createHeaders);
-            
+
             $createResponse = curl_exec($createCh);
             $createHttpCode = curl_getinfo($createCh, CURLINFO_HTTP_CODE);
             $createError = curl_error($createCh);
             curl_close($createCh);
-            
+
             if ($createError) {
                 add_flash_message("Error creating user profile: $createError", 'danger');
                 return false;
             }
-            
+
             if ($createHttpCode >= 400) {
                 $errorData = json_decode($createResponse, true);
                 $errorMessage = $errorData['message'] ?? 'Unknown error creating profile';
                 add_flash_message("Error creating user profile: $errorMessage", 'danger');
                 return false;
             }
-            
+
             $createResult = json_decode($createResponse, true);
-            
+
             if (!$createResult || empty($createResult)) {
                 add_flash_message('Error creating user profile: Empty response', 'danger');
                 return false;
             }
-            
+
             $userData = $createResult;
         }
 
@@ -240,23 +248,37 @@ class User {
         return true;
     }
 
-    public function logout() {
+    public function logout()
+    {
+        // Try to invalidate the token on Supabase, but don't let it prevent logout if it fails
         if (isset($_SESSION['refresh_token'])) {
-            $data = [
-                'refresh_token' => $_SESSION['refresh_token']
-            ];
-            $this->makeRequest('POST', 'logout', $data, '', true);
+            try {
+                $data = [
+                    'refresh_token' => $_SESSION['refresh_token']
+                ];
+                $this->makeRequest('POST', 'logout', $data, '', true);
+            } catch (Exception $e) {
+                // Log the error but continue with local logout
+                error_log('Error during Supabase logout: ' . $e->getMessage());
+            }
         }
 
+        // Always clear the session regardless of API success
         unset($_SESSION['user_id']);
         unset($_SESSION['username']);
         unset($_SESSION['user_theme']);
         unset($_SESSION['access_token']);
         unset($_SESSION['refresh_token']);
+        unset($_SESSION['email']);
+
+        // Destroy the session
         session_destroy();
+
+        return true;
     }
 
-    public function setTheme($user_id, $theme) {
+    public function setTheme($user_id, $theme)
+    {
         $query = "?id=eq." . urlencode($user_id);
         $data = ['theme_preference' => $theme];
 

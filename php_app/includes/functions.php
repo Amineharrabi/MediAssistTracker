@@ -62,7 +62,7 @@ function require_login()
 {
     if (!is_logged_in()) {
         add_flash_message('Please log in to access this page.', 'info');
-        redirect('/login.php');
+        redirect('/index.php?route=login');
     }
 }
 
@@ -103,9 +103,31 @@ function json_decode_safe($json)
 }
 
 
+function get_user_theme()
+{
+    return $_SESSION['user_theme'] ?? 'light';
+}
+
+
+function is_future_date($date)
+{
+    $date_timestamp = strtotime($date);
+    $current_timestamp = time();
+
+    return $date_timestamp > $current_timestamp;
+}
+
+
 function render($template, $variables = [])
 {
-    global $theme, $current_year;
+    // Add default variables that templates might need
+    if (!isset($variables['theme'])) {
+        $variables['theme'] = get_user_theme();
+    }
+
+    if (!isset($variables['current_year'])) {
+        $variables['current_year'] = date('Y');
+    }
 
     extract($variables);
 
