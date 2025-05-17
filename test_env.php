@@ -5,8 +5,8 @@ error_reporting(E_ALL);
 echo "Script is running...<br>";
 
 // Your Supabase project URL and API Key
-$supabaseUrl = 'https://toxhzksisgnixojetdmg.supabase.co';
-$supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRveGh6a3Npc2duaXhvamV0ZG1nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ5NzE3NzgsImV4cCI6MjA2MDU0Nzc3OH0.IuTiPayuQzf2EJtZ-q4U3eAu_H0nusLCP4s1SFOAldc'; // Replace with your actual anon/public key
+$supabaseUrl = 'https://xxxxxxxxxxxx.supabase.co';
+$supabaseKey = 'xxxxxxxxxxxxxxxxxxxxxpc2duaXhvamVxxxxxxmFub24iLCJxxxxxxsLCP4s1SFOAldc'; // Replace with your actual anon/public key
 
 // Function to query data from a table
 function queryData($supabaseUrl, $supabaseKey, $tableName, $options = [])
