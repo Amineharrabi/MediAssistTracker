@@ -67,7 +67,7 @@ create a new project ->
 get the SUPABASE_URL
 get the SUPABASE_KEY (example :
 SUPABASE_URL=https://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.supabase.co
-SUPABASE_KEY=kjgKJhjhEBljfIDYDnKDldnf5fffkkJFnfKNFKJDnsHTsIUFKjLF?kjhjlkqzJKLDJGLZ65xjGKDbJKFkjXx)
+SUPABASE_KEY=kjgKJhjhEBljfIDYDnKDldnxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Update the .env file in config with your database credentials:
 
