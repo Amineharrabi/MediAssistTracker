@@ -75,8 +75,12 @@ switch ($route) {
             }
 
             if (empty($errors)) {
-                
+                                try {
+
+
                     $result = $userModel->create($username, $email, $password);
+                    if ($result) {
+
 
                    
                         add_flash_message('Account created successfully! Please check your email for verification.', 'success');
@@ -88,6 +92,10 @@ switch ($route) {
                         ]);
                         exit;
                     }
+                         } catch (Exception $e) {
+                    add_flash_message($e->getMessage(), 'danger');
+                }
+            } 
                 
              else {
                 foreach ($errors as $error) {
